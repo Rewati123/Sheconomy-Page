@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/pages/api/auth/[...nextauth]'
-import { redirect } from 'next/navigation'
-import prisma from '@/lib/prisma'
-import VideoList from '@/components/VideoList'
 
+import { redirect } from 'next/navigation'
+import prisma from '../../lib/prisma'
+import VideoList from '../../components/VideoList'
+import { authOptions } from './auth/[...nextauth]'
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions)
 

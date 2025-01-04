@@ -1,36 +1,43 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Network, BarChart2, Globe, Users } from 'lucide-react'
+import Image from 'next/image'
 
 const benefits = [
-  { title: "Networking", description: "Find Co-founders and Investors for your Startup or Business", icon: Network },
-  { title: "Business Strategy", description: "A business strategy sets goals and plans to achieve a competitive edge.", icon: BarChart2 },
-  { title: "Global Exposure", description: "Pitch your ideas to international investors and collaborators.", icon: Globe },
-  { title: "Women-Led Community", description: "A women-led community offers support, empowerment, and resources to help women thrive in their entrepreneurial journeys.", icon: Users }
+  { title: "Networking", description: "Find Co-founders and Investors for your Startup or Business", image: "/10 1.png" },
+  { title: "Business Strategy", description: "A business strategy sets goals and plans to achieve a competitive edge.", image: "/11 1.png" },
+  { title: "Global Exposure", description: "Pitch your ideas to international investors and collaborators.", image: "/03 1.png" },
+  { title: "Women-Led Community", description: "A women-led community offers support, empowerment, and resources to help women thrive in their entrepreneurial journeys.", image: "/04 1.png" },
+  { title: "Support & Mentorship", description: "Get personalized mentorship to guide your startup through each phase.", image: "/09 1.png" }
 ]
 
 export default function Benefits() {
   return (
-    <section id="benefits" className="py-16 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-[#D41461] mb-12">Program Benefits</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon
-            return (
-              <Card key={index} className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardHeader>
-                  <Icon className="w-12 h-12 text-[#D41461] mb-4" />
-                  <CardTitle className="text-xl font-semibold">{benefit.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </CardContent>
-              </Card>
-            )
-          })}
+    <section id="benefits" className="py-16 bg-white px-6">
+      <div className="container mx-auto">
+        {/* Heading */}
+        <h2 className="text-4xl sm:text-5xl font-bold text-center text-[#D41461] mb-4">Program Benefits</h2>
+        <div className="border-b-4 border-[#D41461] w-1/4 mx-auto mb-8"></div>
+
+        {/* 1st row with 3 items */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {benefits.slice(0, 3).map((benefit, index) => (
+            <div key={index} className="flex flex-col items-center text-center">
+              <Image src={benefit.image} alt={benefit.title} width={120} height={120} className="mb-4"/>
+              <h3 className="text-2xl font-semibold">{benefit.title}</h3>
+              <p className="mt-2 px-4 text-lg break-words max-w-xs">{benefit.description}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* 2nd row with 2 items */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12">
+          {benefits.slice(3, 5).map((benefit, index) => (
+            <div key={index} className="flex flex-col items-center text-center">
+              <Image src={benefit.image} alt={benefit.title} width={120} height={120} className="mb-4"/>
+              <h3 className="text-2xl font-semibold">{benefit.title}</h3>
+              <p className="mt-2 px-4 text-lg break-words max-w-xs">{benefit.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   )
 }
-

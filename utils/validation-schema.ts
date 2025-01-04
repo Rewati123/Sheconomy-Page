@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 
-const phoneRegExp = /^(\+\d{1,3}[- ]?)?\d{10}$/
+const phoneRegExp = /^\+?[1-9]\d{1,14}$/
 
 export const applicationSchema = Yup.object().shape({
   fullName: Yup.string()
@@ -24,13 +24,13 @@ export const applicationSchema = Yup.object().shape({
     .max(100, 'Startup name is too long')
     .required('Startup name is required'),
   description: Yup.string()
-    .min(50, 'Description must be at least 50 characters')
+    .min(10, 'Description must be at least 50 characters')
     .max(500, 'Description must not exceed 500 characters')
     .required('Description is required'),
   profileLink: Yup.string()
     .url('Invalid URL')
     .required('Profile link is required'),
-  recaptcha: Yup.string().required('Please complete the reCAPTCHA'),
+ 
 })
 
 export type ApplicationFormValues = Yup.InferType<typeof applicationSchema>

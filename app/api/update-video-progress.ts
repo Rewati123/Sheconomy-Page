@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@/lib/prisma'
+import prisma from '../../lib/prisma'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from './auth/[...nextauth]'
-import { sendVideoCompletionEmail, sendAdminNotification } from '@/utils/emailUtils'
+import { sendVideoCompletionEmail, sendAdminNotification } from '../../utils/emailUtils'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {

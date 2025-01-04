@@ -3,19 +3,24 @@
 import { useEffect, useRef, useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { X } from 'lucide-react'
-import ReCAPTCHA from "react-google-recaptcha"
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { applicationSchema, type ApplicationFormValues } from "../utils/validation-schema"
 import OTPVerification from "./OTPVerification"
+import 'react-phone-input-2/lib/style.css';
+import PhoneInput from "react-phone-input-2";
 
+import { CheckCircle } from "lucide-react";
 interface ApplicationModalProps {
   isOpen: boolean
   onClose: () => void
 }
 
 export default function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
+
+  const [captchaValidated, setCaptchaValidated] = useState(false);
   const [emailVerified, setEmailVerified] = useState(false)
   const [phoneVerified, setPhoneVerified] = useState(false)
+ 
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -34,7 +39,7 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
     startupName: "",
     description: "",
     profileLink: "",
-    recaptcha: "",
+ 
   }
 
   const handleSubmit = async (
@@ -58,9 +63,10 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
       console.log("Application submitted successfully:", data)
 
       resetForm()
-      recaptchaRef.current?.reset()
+
       setEmailVerified(false)
       setPhoneVerified(false)
+     
       onClose()
       alert("Application submitted successfully!")
     } catch (error) {
@@ -70,6 +76,11 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
       setSubmitting(false)
     }
   }
+
+  // The effect will re-run whenever the `isOpen` prop changes
+  
+
+ 
 
   return (
     <div 
@@ -146,12 +157,16 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
                     Phone Number *
                   </label>
-                  <Field
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#D41461] focus:border-transparent
-                      ${touched.phone && errors.phone ? 'border-red-500' : 'border-gray-300'}`}
+                  <PhoneInput
+                    country={"us"} // Default country code
+                    value={values.phone}
+                    onChange={(phone) => setFieldValue("phone", phone)}
+                    inputProps={{
+                      name: "phone",
+                      required: true,
+                      className: `w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#D41461] focus:border-transparent 
+                      ${touched.phone && errors.phone ? "border-red-500" : "border-gray-300"}`,
+                    }}
                   />
                   <ErrorMessage
                     name="phone"
@@ -224,19 +239,7 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
                     className="mt-1 text-sm text-red-600"
                   />
                 </div>
-
-                <div className="flex justify-center">
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "your-recaptcha-site-key"}
-                    onChange={(value) => setFieldValue("recaptcha", value)}
-                  />
-                </div>
-                <ErrorMessage
-                  name="recaptcha"
-                  component="div"
-                  className="mt-1 text-sm text-red-600 text-center"
-                />
+              
 
                 <div className="flex justify-end pt-4">
                   <button
@@ -248,7 +251,7 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
                   </button>
                   <button
                     type="submit"
-                    disabled={isSubmitting || !emailVerified || !phoneVerified}
+                    disabled={isSubmitting || !emailVerified || !phoneVerified || !captchaValidated}
                     className="px-6 py-2 bg-[#FF7F42] text-white rounded-lg hover:bg-[#E66A2D] disabled:opacity-50"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Application"}
@@ -262,4 +265,3 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
     </div>
   )
 }
-

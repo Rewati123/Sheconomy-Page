@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@/lib/prisma'
-import { generateTemporaryPassword } from '@/utils/passwordUtils'
-import { sendWelcomeEmail } from '@/utils/emailUtils'
+import prisma from '../../lib/prisma'
+import { generateTemporaryPassword } from '../../utils/passwordUtils'
+import { sendWelcomeEmail } from '../../utils/emailUtils'
 import bcrypt from 'bcryptjs'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

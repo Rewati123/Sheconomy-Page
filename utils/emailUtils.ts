@@ -34,10 +34,10 @@ export async function sendVideoCompletionEmail(email: string, fullName: string, 
   });
 }
 
-export async function sendAdminNotification(userEmail: string, fullName: string, videoTitle: string): Promise<void> {
+export async function sendAdminNotification(userEmail: string, fullName: string, videoTitle: string,adminEmail: string): Promise<void> {
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
-    to: process.env.ADMIN_EMAIL,
+    to: adminEmail,
     subject: `User Completed Video: ${videoTitle}`,
     html: `
       <h1>Video Completion Notification</h1>

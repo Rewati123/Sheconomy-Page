@@ -6,10 +6,12 @@ import Timeline from '../components/Timeline'
 import Testimonials from '../components/Testimonials'
 import Partners from '../components/Partners'
 import Contact from '../components/Contact'
-
+import {CenteredContentWithLogos} from '../components/CenteredContentWithLogos'
+import Lerniningcenter from "../components/Lerniningcenter"
 export default function Home() {
   return (
     <main>
+      {/* <Lerniningcenter/> */}
       <Hero />
       <About />
       <Benefits />
@@ -18,6 +20,7 @@ export default function Home() {
       <Testimonials />
       <Partners />
       <Contact />
+      <CenteredContentWithLogos/>
     </main>
   )
 }

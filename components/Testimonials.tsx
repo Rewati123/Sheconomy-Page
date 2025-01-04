@@ -1,125 +1,107 @@
 "use client"
-
-import * as React from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel"
-import { Button } from "@/components/ui/button"
-import { useCallback, useEffect, useState } from "react"
-import useEmblaCarousel from "embla-carousel-react"
-import Autoplay from "embla-carousel-autoplay"
+import { useState, useEffect } from "react"
 
 const testimonials = [
   {
     name: "Jaycy Naveen",
-    role: "Founder & CEO",
-    company: "MyImaginity",
-    image: "/jaycy-naveen.jpg",
+    role: "Founder & CEO at MyImaginity, Software and IT Services",
+    image: "/Jaycy Naveen 2.png",
     quote: "I founded MyImaginity, a software company, creating innovative solutions tailored to our customers' unique business needs—from websites and apps to software products, digital marketing, and virtual assistants, leveraging the power of cloud, data, and AI."
   },
   {
-    name: "Sarah Johnson",
-    role: "Co-founder",
-    company: "TechWomen",
-    image: "/sarah-johnson.jpg",
-    quote: "The SHEconomy program provided me with the tools and network I needed to turn my tech startup idea into a thriving business. The mentorship and support have been invaluable."
+    name: "Achla Bhupendra Suthar ( UAE ) ",
+    role: "Chairperson at Sustainable Future Foundation",
+    image: "/Achla 1.png",
+    quote: "Being a Sustainability and Environment consultant by profession and a social worker by passion,. As the Chairperson of the Sustainable Future Foundation, I'm able to promote sustainable initiatives both as professional and not-for-profit activities through SHEconomy"
   },
   {
-    name: "Priya Patel",
-    role: "CTO",
-    company: "InnovatHer",
-    image: "/priya-patel.jpg",
-    quote: "As a woman in tech, I often felt isolated. The SHEconomy community has been a game-changer, connecting me with like-minded entrepreneurs and opening doors to new opportunities."
+    name: "Sudha Kumar Audipudy",
+    role: "Founder & CEO of The Learning Spot Academy",
+    image: "/Sudha 1.png",
+    quote: "It all began in 2013 with a mission to enhance children’s education by introducing fresh, innovative methods through The Learning Spot Academy. Offering a blend of online and offline courses, the academy curates child-friendly programs in Creative Mathematics, VedicMaths, Soft Skills , Handwriting Courses and Knowledge Series."
   },
   {
-    name: "Emily Chen",
-    role: "Founder",
-    company: "EcoTech Solutions",
-    image: "/emily-chen.jpg",
-    quote: "SHEconomy's program helped me refine my sustainable tech business model. The mentors' insights were crucial in navigating the challenges of a green startup."
+    name: "Mrs Sonal Jhajj ",
+    role: "Founder & C.D Metamorphosis ",
+    image: "/Sonal Jhajj 1.png",
+    quote: "I envision creating awareness of genuine educators and reading materials through SHEconomy and empowering women in a true sense through actions and forming authentic connections through the SHEconomy community."
   },
   {
-    name: "Zara Ahmed",
-    role: "CEO",
-    company: "FinTech Innovators",
-    image: "/zara-ahmed.jpg",
-    quote: "The networking opportunities through SHEconomy were unparalleled. I found my co-founder and secured our first round of funding thanks to the connections made here."
+    name: "Sharmistha Chakraborty",
+    role: "Vastu Consultant and Interior Designer",
+    image: "/Sharmistha Chakraborty 1.png",
+    quote: "SHEconomy has been a platform where my expertise in interior design and Vastu flourished. It connects me with like-minded clients, helping me grow professionally while delivering harmonious, thoughtfully planned spaces to those I serve. To be on SHEconomy is a pretty empowering feeling."
   }
 ]
 
-const autoplayOptions = {
-  delay: 5000,
-  rootNode: (emblaRoot: HTMLElement) => emblaRoot.parentElement,
-}
-
 export default function Testimonials() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay(autoplayOptions)])
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
 
-  const scrollTo = useCallback(
-    (index: number) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi]
-  )
+  const nextTestimonial = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+  }
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-  }, [emblaApi, setSelectedIndex])
+  const prevTestimonial = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
+  }
 
   useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on("select", onSelect)
-    emblaApi.on("reInit", onSelect)
-
-    return () => {
-      emblaApi.off("select", onSelect)
-      emblaApi.off("reInit", onSelect)
-    }
-  }, [emblaApi, onSelect])
+    const interval = setInterval(nextTestimonial, 5000) // Autoplay every 5 seconds
+    return () => clearInterval(interval)
+  }, [])
 
   return (
-    <section className="py-16 bg-gray-100">
-      <div className="container mx-auto px-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-[#D41461] mb-12">Listen From Our Entrepreneurs</h2>
-        <Carousel
-          ref={emblaRef}
-          className="w-full max-w-4xl mx-auto"
-        >
-          <CarouselContent>
-            {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <CardContent className="flex flex-col items-center p-6">
-                      <Avatar className="w-24 h-24 mb-4">
-                        <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                        <AvatarFallback>{testimonial.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
-                      </Avatar>
-                      <h3 className="text-xl font-semibold mb-1">{testimonial.name}</h3>
-                      <p className="text-sm text-gray-600 mb-4">{testimonial.role} at {testimonial.company}</p>
-                      <p className="text-gray-700 text-center">{testimonial.quote}</p>
-                    </CardContent>
-                  </Card>
+    <section className="py-16 bg-gray-100 relative bg-cover bg-center" style={{ backgroundImage: "url('/slider.jpg')" }}>
+      <div className="absolute inset-0 bg-black opacity-30"></div>
+      <div className="container mx-auto px-6 relative z-10">
+        <h2 className="text-4xl sm:text-5xl font-bold text-center text-white mb-2">Listen From Our Entrepreneurs</h2>
+        <div className="border-b-2 border-[#D41461] w-1/2 mx-auto mb-8"></div>
+
+        {/* Carousel */}
+        <div className="relative">
+          <div className="w-full max-w-4xl mx-auto overflow-hidden">
+            <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="flex-shrink-0 w-full px-4">
+                  <div className="bg-white bg-opacity-50 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl h-auto">
+                    <div className="flex flex-col sm:flex-row items-center p-8 space-x-6">
+                      <div className="bg-[#D41461] w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center">
+                        <img src={testimonial.image} alt={testimonial.name} className="w-20 h-20 sm:w-24 sm:h-24 rounded-full" />
+                      </div>
+                      <div className="flex flex-col mt-4 sm:mt-0">
+                        <h3 className="text-2xl sm:text-3xl font-semibold mb-1 text-black">{testimonial.name}</h3>
+                        <p className="text-base sm:text-lg text-black mb-4">{testimonial.role}</p>
+                      </div>
+                    </div>
+                    <div className="px-8 pb-4">
+                      <p className="text-lg sm:text-xl text-black">{testimonial.quote}</p>
+                    </div>
+                  </div>
                 </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+              ))}
+            </div>
+          </div>
+
+          {/* Carousel Controls */}
+          <div className="absolute top-1/2 left-0 transform -translate-y-1/2 px-4">
+            <button onClick={prevTestimonial} className="bg-[#D41461] text-white p-4 w-12 h-12 rounded-full flex items-center justify-center">
+              &lt;
+            </button>
+          </div>
+          <div className="absolute top-1/2 right-0 transform -translate-y-1/2 px-4">
+            <button onClick={nextTestimonial} className="bg-[#D41461] text-white p-4 w-12 h-12 rounded-full flex items-center justify-center">
+              &gt;
+            </button>
+          </div>
+        </div>
+
+        {/* Pagination Dots */}
         <div className="flex justify-center mt-6">
           {testimonials.map((_, index) => (
-            <Button
+            <button
               key={index}
-              variant="ghost"
-              size="sm"
-              className={`w-3 h-3 rounded-full mx-1 p-0 ${
-                index === selectedIndex ? "bg-[#D41461]" : "bg-gray-300"
-              }`}
-              onClick={() => scrollTo(index)}
+              className={`w-3 h-3 rounded-full mx-1 p-0 ${index === currentIndex ? "bg-[#D41461]" : "bg-gray-300"}`}
+              onClick={() => setCurrentIndex(index)}
             />
           ))}
         </div>
@@ -127,4 +109,3 @@ export default function Testimonials() {
     </section>
   )
 }
-

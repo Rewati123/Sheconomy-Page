@@ -51,10 +51,8 @@ export function Quiz({ quiz, onComplete }: QuizProps) {
 
   return (
     <Dialog open={true}>
-      <Dialog.Content>
-        <Dialog.Header>
-          <Dialog.Title>Quiz</Dialog.Title>
-        </Dialog.Header>
+      <div className="p-4">
+        <h2 className="text-xl font-bold">Quiz</h2>
         {!showResult ? (
           <>
             <p className="mb-4">{quiz.questions[currentQuestion].text}</p>
@@ -97,8 +95,9 @@ export function Quiz({ quiz, onComplete }: QuizProps) {
             </div>
           </>
         )}
-      </Dialog.Content>
+      </div>
     </Dialog>
-  )
+  );
+  
 }
 

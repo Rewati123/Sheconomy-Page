@@ -6,14 +6,11 @@ import { useMediaQuery } from "../hooks/use-media-query"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const partners = [
-  { name: "TechInnovate", logo: "/techinnovate-logo.png" },
-  { name: "WomenInTech", logo: "/womenintech-logo.png" },
-  { name: "FutureFounders", logo: "/futurefounders-logo.png" },
-  { name: "DigitalDreamers", logo: "/digitaldreamers-logo.png" },
-  { name: "AI Ventures", logo: "/ai-ventures-logo.png" },
-  { name: "GreenTech Solutions", logo: "/greentech-solutions-logo.png" },
-  { name: "Cyber Secure", logo: "/cyber-secure-logo.png" },
-  { name: "Data Dynamics", logo: "/data-dynamics-logo.png" },
+  { name: "Sharmistha Chakraborty", title:"Interior designer & vastu consultant", logo: "/Sharmistha Chakraborty 1.png" },
+  { name: "Sonal Jhajj", title:"Founder & C.D Metamorphosis", logo: "/Sonal Jhajj 1.png" },
+  { name: "Sudha Kumar Audipudy", title: "Founder & CEO The Learning Spot Academy", logo: "/Sudha 1.png" },
+  { name: "Achla Bhupendra", title: "Chairperson Sustainable Future Foundation", logo: "/Achla 1.png" },
+  { name: "Jaycy Naveen", title: "Founder & CEO MyImaginity", logo: "/Jaycy Naveen 2.png" },
 ]
 
 export default function Partners() {
@@ -21,6 +18,7 @@ export default function Partners() {
   const isTablet = useMediaQuery("(min-width: 641px) and (max-width: 1024px)")
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  // Determine the number of cards to display per slide based on screen size
   const slidesToShow = isMobile ? 1 : isTablet ? 2 : 4
   const totalSlides = Math.ceil(partners.length / slidesToShow)
 
@@ -41,12 +39,13 @@ export default function Partners() {
   }, [nextSlide])
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#D41461] mb-8 sm:mb-12">Empowering Partners</h2>
-        <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#D41461] mb-6 sm:mb-4">Our Entrepreneur's Community</h2>
+        {/* <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
           We collaborate with industry leaders to provide the best opportunities and resources for women in tech.
-        </p>
+        </p> */}
+        <div className="border-b-4 border-[#D41461] w-1/2 mx-auto mb-8"></div>
         <div className="relative w-full max-w-5xl mx-auto">
           <div className="overflow-hidden">
             <div
@@ -56,23 +55,24 @@ export default function Partners() {
               {partners.map((partner, index) => (
                 <div
                   key={index}
-                  className={`flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4`}
+                  className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4"
                 >
-                  <div className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg p-6">
-                    <div className="relative w-32 h-32 mx-auto">
-                      <Image
-                        src={partner.logo}
-                        alt={partner.name}
-                        layout="fill"
-                        objectFit="contain"
-                      />
-                    </div>
-                    <h3 className="mt-4 text-lg font-semibold text-gray-800 text-center">{partner.name}</h3>
+                  <div className="relative w-full h-80 mb-4"> {/* Increased height here */}
+                    <Image
+                      src={partner.logo}
+                      alt={partner.name}
+                      layout="fill"
+                      objectFit="cover"
+                      className="w-full h-full"
+                    />
                   </div>
+                  <h3 className="text-sm font-semibold text-gray-800 text-center">{partner.name}</h3>
+                  <p className="text-xs text-gray-600 text-center">{partner.title}</p>
                 </div>
               ))}
             </div>
           </div>
+          {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none"
@@ -92,4 +92,3 @@ export default function Partners() {
     </section>
   )
 }
-

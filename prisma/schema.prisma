@@ -58,11 +58,13 @@ model VideoProgress {
 }
 
 model Quiz {
-  id        Int       @id @default(autoincrement())
-  videoId   Int
-  video     Video     @relation(fields: [videoId], references: [id])
-  questions Question[]
+  id              Int               @id @default(autoincrement())
+  videoId         Int               @unique
+  video           Video             @relation(fields: [videoId], references: [id])
+  questions       Question[]
+  userQuizResults UserQuizResult[]
 }
+
 
 model Question {
   id        Int       @id @default(autoincrement())
