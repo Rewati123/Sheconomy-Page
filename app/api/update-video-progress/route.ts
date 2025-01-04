@@ -58,7 +58,14 @@ export async function POST(req: NextRequest) {
         const adminEmail = 'admin@example.com'; // Update with the actual admin email source
 
         await sendVideoCompletionEmail(user.email, user.application.fullName, video.title)
-        await sendAdminNotification(user.email, user.application.fullName, video.title, adminEmail)
+        await sendAdminNotification(
+          user.email, 
+          user.application.fullName, 
+          video.title, 
+          process.env.ADMIN_EMAIL as string
+        )
+        
+
       }
     }
 
