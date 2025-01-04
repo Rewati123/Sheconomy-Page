@@ -1,23 +1,20 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 import prisma from '../../../lib/prisma'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../auth/[...nextauth]'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method Not Allowed' })
-  }
-
-  const session = await getServerSession(req, res, authOptions)
-
-  if (!session) {
-    return res.status(401).json({ message: 'Unauthorized' })
-  }
-
-  const { videoId } = req.query
+export async function GET(req: NextRequest) {
+  // Extract videoId from query parameters using .get() method
+  const videoId = req.nextUrl.searchParams.get('videoId')
 
   if (!videoId) {
-    return res.status(400).json({ message: 'Missing videoId' })
+    return NextResponse.json({ message: 'Missing videoId' }, { status: 400 })
+  }
+
+  const session = await getServerSession({ req, ...authOptions }) // Adjusted this to use an object with 'req'
+
+  if (!session) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
   try {
@@ -38,13 +35,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     if (!quiz) {
-      return res.status(404).json({ message: 'Quiz not found' })
+      return NextResponse.json({ message: 'Quiz not found' }, { status: 404 })
     }
 
-    res.status(200).json({ quiz })
+    return NextResponse.json({ quiz })
   } catch (error) {
     console.error('Error fetching quiz:', error)
-    res.status(500).json({ message: 'Error fetching quiz' })
+    return NextResponse.json({ message: 'Error fetching quiz' }, { status: 500 })
   }
 }
-
