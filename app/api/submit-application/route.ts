@@ -1,21 +1,21 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 import prisma from '../../../lib/prisma'
 import { generateTemporaryPassword } from '../../../utils/passwordUtils'
 import { sendWelcomeEmail } from '../../../utils/emailUtils'
 import bcrypt from 'bcryptjs'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' })
-  }
+export async function POST(req: NextRequest) {
+  // Parse JSON body
+  const body = await req.json()
+  const { fullName, email, phone, startupName, description, profileLink } = body
 
-  const { fullName, email, phone, startupName, description, profileLink } = req.body
-
+  // Check if all required fields are provided
   if (!fullName || !email || !phone || !startupName || !description || !profileLink) {
-    return res.status(400).json({ message: 'Missing required fields' })
+    return NextResponse.json({ message: 'Missing required fields' }, { status: 400 })
   }
 
   try {
+    // Create application record
     const application = await prisma.application.create({
       data: {
         fullName,
@@ -27,9 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     })
 
+    // Generate a temporary password and hash it
     const temporaryPassword = generateTemporaryPassword()
     const hashedPassword = await bcrypt.hash(temporaryPassword, 10)
 
+    // Create user record
     const user = await prisma.user.create({
       data: {
         email,
@@ -38,12 +40,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     })
 
+    // Send welcome email with temporary password
     await sendWelcomeEmail(email, fullName, temporaryPassword)
 
-    res.status(201).json({ message: 'Application submitted successfully', application })
+    // Return success response
+    return NextResponse.json({ message: 'Application submitted successfully', application }, { status: 201 })
   } catch (error) {
     console.error('Error submitting application:', error)
-    res.status(500).json({ message: 'Error submitting application' })
+    return NextResponse.json({ message: 'Error submitting application' }, { status: 500 })
   }
 }
-

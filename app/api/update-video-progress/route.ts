@@ -1,24 +1,25 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 import prisma from '../../../lib/prisma'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../auth/[...nextauth]'
 import { sendVideoCompletionEmail, sendAdminNotification } from '../../../utils/emailUtils'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' })
+    return NextResponse.json({ message: 'Method Not Allowed' }, { status: 405 })
   }
 
-  const session = await getServerSession(req, res, authOptions)
+  // Retrieve session from the request
+  const session = await getServerSession({ req, ...authOptions })
 
   if (!session) {
-    return res.status(401).json({ message: 'Unauthorized' })
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
-  const { userId, videoId, progress, completed } = req.body
+  const { userId, videoId, progress, completed } = await req.json()
 
   if (!userId || !videoId || progress === undefined || completed === undefined) {
-    return res.status(400).json({ message: 'Missing required fields' })
+    return NextResponse.json({ message: 'Missing required fields' }, { status: 400 })
   }
 
   try {
@@ -53,15 +54,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       })
 
       if (user && video) {
+        // Assuming the admin email is stored in a configuration or database
+        const adminEmail = 'admin@example.com'; // Update with the actual admin email source
+
         await sendVideoCompletionEmail(user.email, user.application.fullName, video.title)
-        await sendAdminNotification(user.email, user.application.fullName, video.title)
+        await sendAdminNotification(user.email, user.application.fullName, video.title, adminEmail)
       }
     }
 
-    res.status(200).json({ message: 'Video progress updated successfully', progress: updatedProgress })
+    return NextResponse.json({ message: 'Video progress updated successfully', progress: updatedProgress }, { status: 200 })
   } catch (error) {
     console.error('Error updating video progress:', error)
-    res.status(500).json({ message: 'Error updating video progress' })
+    return NextResponse.json({ message: 'Error updating video progress' }, { status: 500 })
   }
 }
-

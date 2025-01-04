@@ -1,26 +1,29 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 import prisma from '../../../lib/prisma'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../auth/[...nextauth]'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' })
+    return NextResponse.json({ message: 'Method Not Allowed' }, { status: 405 })
   }
 
-  const session = await getServerSession(req, res, authOptions)
+  // Retrieve the session using the request
+  const session = await getServerSession({ req, ...authOptions })
 
   if (!session) {
-    return res.status(401).json({ message: 'Unauthorized' })
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
-  const { userId, quizId, score } = req.body
+  // Get the data from the request body
+  const { userId, quizId, score } = await req.json()
 
   if (!userId || !quizId || score === undefined) {
-    return res.status(400).json({ message: 'Missing required fields' })
+    return NextResponse.json({ message: 'Missing required fields' }, { status: 400 })
   }
 
   try {
+    // Save the quiz result in the database
     const result = await prisma.userQuizResult.create({
       data: {
         userId,
@@ -29,10 +32,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     })
 
-    res.status(201).json({ message: 'Quiz result submitted successfully', result })
+    return NextResponse.json({ message: 'Quiz result submitted successfully', result }, { status: 201 })
   } catch (error) {
     console.error('Error submitting quiz result:', error)
-    res.status(500).json({ message: 'Error submitting quiz result' })
+    return NextResponse.json({ message: 'Error submitting quiz result' }, { status: 500 })
   }
 }
-

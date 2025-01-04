@@ -1,30 +1,38 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth/next' // Correct import
+import { authOptions } from '../auth/[...nextauth]' // Assuming authOptions are correct for your project
 import prisma from '../../../lib/prisma'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../auth/[...nextauth]'
-
 import PDFDocument from 'pdfkit'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method Not Allowed' })
-  }
-
-  const session = await getServerSession(req, res, authOptions)
-
-  if (!session) {
-    return res.status(401).json({ message: 'Unauthorized' })
-  }
-
-  const { userId } = req.query
+// Function to handle GET request
+export async function GET(req: NextRequest) {
+  // Extracting userId from query params
+  const url = new URL(req.url)
+  const userId = url.searchParams.get('userId')
 
   if (!userId) {
-    return res.status(400).json({ message: 'Missing userId' })
+    return NextResponse.json({ message: 'Missing userId' }, { status: 400 })
+  }
+
+  // Correct usage of getServerSession
+  const session = await getServerSession({ 
+    req, 
+    ...authOptions // Ensure authOptions are spread correctly
+  })
+
+  if (!session) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
   try {
+    // Validate userId is a number
+    const userIdNumber = Number(userId)
+    if (isNaN(userIdNumber)) {
+      return NextResponse.json({ message: 'Invalid userId' }, { status: 400 })
+    }
+
     const user = await prisma.user.findUnique({
-      where: { id: Number(userId) },
+      where: { id: userIdNumber },
       include: {
         application: true,
         videoProgress: {
@@ -37,25 +45,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' })
+      return NextResponse.json({ message: 'User not found' }, { status: 404 })
     }
 
     const totalVideos = await prisma.video.count()
     const completedVideos = user.videoProgress.filter(vp => vp.completed).length
 
     if (completedVideos < totalVideos) {
-      return res.status(400).json({ message: 'Course not completed yet' })
+      return NextResponse.json({ message: 'Course not completed yet' }, { status: 400 })
     }
 
     // Generate PDF certificate
     const doc = new PDFDocument()
-    
+
     // Set the response headers for PDF download
-    res.setHeader('Content-Type', 'application/pdf')
-    res.setHeader('Content-Disposition', `attachment; filename=certificate_${user.id}.pdf`)
+    const response = new NextResponse()
+    response.headers.set('Content-Type', 'application/pdf')
+    response.headers.set('Content-Disposition', `attachment; filename=certificate_${user.id}.pdf`)
 
     // Pipe the PDF document to the response
-    doc.pipe(res)
+    doc.pipe(response)
 
     // Add content to the PDF
     doc.fontSize(24).text('Certificate of Completion', 100, 100)
@@ -67,9 +76,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Finalize the PDF and end the response
     doc.end()
 
+    return response
   } catch (error) {
     console.error('Error generating certificate:', error)
-    res.status(500).json({ message: 'Error generating certificate' })
+    return NextResponse.json({ message: 'Error generating certificate' }, { status: 500 })
   }
 }
-
