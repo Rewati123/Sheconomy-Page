@@ -47,3 +47,31 @@ export async function sendAdminNotification(userEmail: string, fullName: string,
   });
 }
 
+/**
+ * Sends a welcome email to the user with a temporary password.
+ */
+export async function sendWelcomeEmail(email: string, fullName: string, temporaryPassword: string): Promise<void> {
+  try {
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM,
+      to: email,
+      subject: 'Welcome to SHEconomy!',
+      html: `
+        <h1>Welcome to SHEconomy, ${fullName}!</h1>
+        <p>We are excited to have you on board.</p>
+        <p>Your account has been created successfully. Here are your temporary login credentials:</p>
+        <ul>
+          <li><strong>Email:</strong> ${email}</li>
+          <li><strong>Temporary Password:</strong> ${temporaryPassword}</li>
+        </ul>
+        <p>Please log in and update your password as soon as possible.</p>
+        <p><a href="${process.env.NEXT_PUBLIC_BASE_URL}/login">Click here to log in</a></p>
+        <p>Best regards,<br>The SHEconomy Team</p>
+      `,
+    });
+    console.log(`Welcome email sent to ${email}`);
+  } catch (error) {
+    console.error('Error sending welcome email:', error);
+    throw new Error('Failed to send welcome email');
+  }
+}
