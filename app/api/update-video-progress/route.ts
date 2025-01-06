@@ -48,16 +48,20 @@ export async function POST(req: Request) {
         where: { id: videoId },
       });
 
-      const adminEmail = process.env.ADMIN_EMAIL;
+      
 
-      if (!adminEmail) {
-        console.error('ADMIN_EMAIL environment variable is not set.');
-      }
-
-      if (user && video && adminEmail) {
+      if (user && video) {
+        const adminEmail = process.env.ADMIN_EMAIL;
+      
+        if (!adminEmail) {
+          console.error('ADMIN_EMAIL environment variable is not set.');
+          throw new Error('Admin email is not configured.');
+        }
+      
         await sendVideoCompletionEmail(user.email, user.application.fullName, video.title);
         await sendAdminNotification(user.email, user.application.fullName, video.title, adminEmail);
       }
+      
     }
 
     return NextResponse.json({
