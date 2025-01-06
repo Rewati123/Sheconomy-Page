@@ -1,24 +1,21 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
+
 import prisma from '../../../lib/prisma';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]';
 import { sendVideoCompletionEmail, sendAdminNotification } from '../../../utils/emailUtils';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
-  }
-
-  const session = await getServerSession(req, res, authOptions);
+export async function POST(req: Request) {
+  const session = await getServerSession(authOptions);
 
   if (!session) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 
-  const { userId, videoId, progress, completed } = req.body;
+  const { userId, videoId, progress, completed } = await req.json();
 
   if (!userId || !videoId || progress === undefined || completed === undefined) {
-    return res.status(400).json({ message: 'Missing required fields' });
+    return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
   }
 
   try {
@@ -63,9 +60,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
-    res.status(200).json({ message: 'Video progress updated successfully', progress: updatedProgress });
+    return NextResponse.json({
+      message: 'Video progress updated successfully',
+      progress: updatedProgress,
+    });
   } catch (error) {
     console.error('Error updating video progress:', error);
-    res.status(500).json({ message: 'Error updating video progress' });
+    return NextResponse.json(
+      { message: 'Error updating video progress' },
+      { status: 500 }
+    );
   }
 }
