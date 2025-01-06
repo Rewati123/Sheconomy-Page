@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { X } from 'lucide-react'
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+
 import { applicationSchema, type ApplicationFormValues } from "../utils/validation-schema"
 import OTPVerification from "./OTPVerification"
 import 'react-phone-input-2/lib/style.css';
@@ -17,7 +17,7 @@ interface ApplicationModalProps {
 
 export default function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
 
-  const [captchaValidated, setCaptchaValidated] = useState(false);
+
   const [emailVerified, setEmailVerified] = useState(false)
   const [phoneVerified, setPhoneVerified] = useState(false)
  
@@ -251,7 +251,7 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
                   </button>
                   <button
                     type="submit"
-                    disabled={isSubmitting || !emailVerified || !phoneVerified || !captchaValidated}
+                    disabled={isSubmitting || !emailVerified || !phoneVerified }
                     className="px-6 py-2 bg-[#FF7F42] text-white rounded-lg hover:bg-[#E66A2D] disabled:opacity-50"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Application"}
