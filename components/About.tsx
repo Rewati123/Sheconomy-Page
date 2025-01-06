@@ -15,9 +15,18 @@ export default function About() {
         </h3>
 
         {/* Paragraph Section */}
-        <p className="text-xl sm:text-2xl max-w-4xl mx-auto">
-          The SHEconomy Women-In-Tech initiative is dedicated to empowering women entrepreneurs in the tech industry by offering essential resources, expert mentorship, and a vibrant, supportive community. Our mission is to close the gender gap in technology, enabling women to lead, innovate, and succeed at every stage of their entrepreneurial journey.
-        </p>
+        <div className="max-w-6xl mx-auto">
+          <p className="text-2xl sm:text-3xl leading-relaxed mt-4 text-justify">
+            The SHEconomy Women-In-Tech initiative is dedicated to empowering
+            women entrepreneurs in the tech industry by offering essential
+            resources, expert mentorship, and a vibrant, supportive community.
+          </p>
+          <p className="text-2xl sm:text-3xl leading-relaxed mt-4 text-justify">
+            Our mission is to close the gender gap in technology, enabling
+            women to lead, innovate, and succeed at every stage of their
+            entrepreneurial journey.
+          </p>
+        </div>
       </div>
     </section>
   );

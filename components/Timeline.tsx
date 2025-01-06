@@ -10,17 +10,27 @@ export default function Timeline() {
   return (
     <section id="timeline" className="py-16 bg-white px-6 sm:px-8 lg:px-12">
       <div className="container mx-auto">
+        {/* Heading Section */}
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-[#D41461] mb-3">
           Application Process & Timeline
         </h2>
 
+        {/* Line Under the Heading */}
         <div className="border-b-4 border-[#D41461] w-1/2 sm:w-1/3 mx-auto mb-8"></div>
-        <p className="text-lg sm:text-xl lg:text-2xl max-w-4xl mx-auto text-center mb-12">
-          Getting started with the Women in Digital Startup Program is simple! Submit your application online by 10th Jan, 2025.
-          Our team will review submissions and shortlist candidates based on their vision, innovation, and potential. The program kicks off on 29th Dec, 2024, with engaging workshops, mentorship sessions, and hands-on support.
-        </p>
 
-        <Card className="bg-gray-100 duration-300 relative rounded-2xl">
+        {/* Paragraphs Section */}
+        <div className="max-w-6xl mx-auto">
+  <p className="text-xl sm:text-2xl lg:text-3xl leading-relaxed mt-4 text-justify">
+    Getting started with the Women in Digital Startup Program is simple! Submit your application online by 10th Jan, 2025.
+  </p>
+  <p className="text-xl sm:text-2xl lg:text-3xl leading-relaxed mt-4 text-justify">
+    Our team will review submissions and shortlist candidates based on their vision, innovation, and potential. The program kicks off on 29th Dec, 2024, with engaging workshops, mentorship sessions, and hands-on support.
+  </p>
+</div>
+
+
+        {/* Card with Timeline Information */}
+        <Card className="bg-gray-100 duration-300 relative rounded-2xl mt-7">
           <CardContent className="p-6 sm:p-8">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-12">
               {/* Start Date Section */}
@@ -37,7 +47,7 @@ export default function Timeline() {
                 <img src="/start-end.png" alt="End Date Icon" className="w-16 sm:w-18 h-auto" />
                 <div>
                   <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-2">Enrollment Ends on</CardTitle>
-                  <p className="text-lg sm:text-xl lg:text-2xl text-gray-600">10th Jan 2025</p>
+                  <p className="text-lg sm:text-xl lg:text-2xl text-gray-600">30th Jan 2025</p>
                 </div>
               </div>
 
@@ -55,6 +65,8 @@ export default function Timeline() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Application Modal */}
       <ApplicationModal isOpen={isOpen} onClose={closeModal} />
     </section>
   )
