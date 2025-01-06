@@ -12,11 +12,10 @@ export default function Benefits() {
   return (
     <section id="benefits" className="py-16 bg-white px-6">
       <div className="container mx-auto">
-        {/* Heading */}
+    
         <h2 className="text-4xl sm:text-5xl font-bold text-center text-[#D41461] mb-4">Program Benefits</h2>
         <div className="border-b-4 border-[#D41461] w-1/4 mx-auto mb-8"></div>
 
-        {/* 1st row with 3 items */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {benefits.slice(0, 3).map((benefit, index) => (
             <div key={index} className="flex flex-col items-center text-center">
@@ -27,7 +26,7 @@ export default function Benefits() {
           ))}
         </div>
 
-        {/* 2nd row with 2 items */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12">
           {benefits.slice(3, 5).map((benefit, index) => (
             <div key={index} className="flex flex-col items-center text-center">

@@ -77,7 +77,7 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
     }
   }
 
-  // The effect will re-run whenever the `isOpen` prop changes
+
   
 
  
