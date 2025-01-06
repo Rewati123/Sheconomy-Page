@@ -42,9 +42,7 @@ export default function Partners() {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#D41461] mb-6 sm:mb-4">Our Entrepreneur's Community</h2>
-        {/* <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
-          We collaborate with industry leaders to provide the best opportunities and resources for women in tech.
-        </p> */}
+     
         <div className="border-b-4 border-[#D41461] w-1/2 mx-auto mb-8"></div>
         <div className="relative w-full max-w-5xl mx-auto">
           <div className="overflow-hidden">
@@ -72,7 +70,7 @@ export default function Partners() {
               ))}
             </div>
           </div>
-          {/* Navigation Buttons */}
+   
           <button
             onClick={prevSlide}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none"
