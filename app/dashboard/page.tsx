@@ -1,23 +1,29 @@
-import { getServerSession } from 'next-auth/next'
+import { getServerSession } from 'next-auth/next';
+import { redirect } from 'next/navigation';
+import prisma from '../../lib/prisma';
+import VideoList from '../../components/VideoList';
+import { authOptions } from '../../app/api/auth/[...nextauth]';
 
-import { redirect } from 'next/navigation'
-import prisma from '../../lib/prisma'
-import VideoList from '../../components/VideoList'
-import { authOptions } from '../../app/api/auth/[...nextauth]'
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect('/login')
+    redirect('/login');
+  }
+
+  const userEmail = session.user?.email ?? null;
+
+  if (!userEmail) {
+    redirect('/login');
   }
 
   const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
+    where: { email: userEmail },
     include: { application: true, videoProgress: { include: { video: true } } },
-  })
+  });
 
   if (!user) {
-    redirect('/login')
+    redirect('/login');
   }
 
   const videos = await prisma.video.findMany({
@@ -26,13 +32,13 @@ export default async function DashboardPage() {
         where: { userId: user.id },
       },
     },
-  })
+  });
 
-  const hasCompletedCourse = (user) => {
-    const totalVideos = videos.length
-    const completedVideos = user.videoProgress.filter(vp => vp.completed).length
-    return completedVideos === totalVideos
-  }
+  const hasCompletedCourse = (user: any) => {
+    const totalVideos = videos.length;
+    const completedVideos = user.videoProgress.filter((vp: any) => vp.completed).length;
+    return completedVideos === totalVideos;
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -44,7 +50,9 @@ export default async function DashboardPage() {
       <main>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
-            <h2 className="text-2xl font-semibold text-gray-900">Welcome, {user.application.fullName}!</h2>
+            <h2 className="text-2xl font-semibold text-gray-900">
+              Welcome, {user.application.fullName}!
+            </h2>
             <p className="mt-2 text-gray-600">Here are your program videos:</p>
             <VideoList videos={videos} userId={user.id} />
             {hasCompletedCourse(user) && (
@@ -63,6 +71,5 @@ export default async function DashboardPage() {
         </div>
       </main>
     </div>
-  )
+  );
 }
-
