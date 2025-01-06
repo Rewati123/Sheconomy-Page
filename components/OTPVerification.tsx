@@ -41,7 +41,7 @@ export default function OTPVerification({ type, value, onVerified }: OTPVerifica
     setIsVerifying(true)
     setError('')
     try {
-      const response = await fetch('http://localhost:3000/api/verify-otp', {
+      const response = await fetch('/api/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type, value, otp }),
