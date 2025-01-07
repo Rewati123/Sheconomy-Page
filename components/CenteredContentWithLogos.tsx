@@ -29,10 +29,10 @@ export function CenteredContentWithLogos() {
       </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-8">
-        {/* Place the first logo under the line */}
+    
         <div className="flex justify-center mb-6 w-32 sm:w-48 md:w-64">
           <Image
-            key={0} // Position for the first logo
+            key={0} 
             src={logos[0].src}
             alt={logos[0].alt}
             width={240}  
@@ -41,7 +41,7 @@ export function CenteredContentWithLogos() {
           />
         </div>
 
-        {/* Other logos */}
+    
         {logos.slice(1).map((logo, index) => (
           <div key={index + 1} className="flex justify-center mb-6 w-32 sm:w-48 md:w-64">
             <Image
