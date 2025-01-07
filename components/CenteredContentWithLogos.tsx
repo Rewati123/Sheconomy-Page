@@ -2,9 +2,9 @@ import Image from 'next/image'
 
 export function CenteredContentWithLogos() {
   const logos = [
-    { src: '/LOGO 2.png', alt: 'Logo 1' },
-    { src: '/LOGO 11.png', alt: 'Logo 2' },
-    { src: '/Logo 01.png', alt: 'Logo 3' },
+    { src: '/logo_2.png', alt: 'Logo 1' },
+    { src: '/logo_3.png', alt: 'Logo 2' },
+    { src: '/logo_1.png', alt: 'Logo 3' },
   ]
 
   return (
