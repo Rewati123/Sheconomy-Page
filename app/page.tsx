@@ -20,7 +20,10 @@ export default function Home() {
       <Testimonials />
       <Partners />
       <Contact />
+      <div  className='mt-10'>
       <CenteredContentWithLogos/>
+      </div>
+ 
     </main>
   )
 }
