@@ -41,10 +41,18 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
     profileLink: "",
  
   }
+  const isValidJson = (str: string) => {
+    try {
+      JSON.parse(str);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
 
   const handleSubmit = async (
     values: ApplicationFormValues,
-    { setSubmitting, resetForm }: any
+    { setSubmitting, resetForm, setFieldError }: any
   ) => {
     try {
       const response = await fetch('/api/submit-application', {
@@ -53,33 +61,37 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to submit application')
-      }
-
-      const data = await response.json()
-      console.log("Application submitted successfully:", data)
-
-      resetForm()
-
-      setEmailVerified(false)
-      setPhoneVerified(false)
-     
-      onClose()
-      alert("Application submitted successfully!")
-    } catch (error) {
-      console.error("Error submitting application:", error)
-      alert("Failed to submit application. Please try again.")
-    } finally {
-      setSubmitting(false)
-    }
-  }
-
-
+      });
   
-
+      const responseText = await response.text(); // Read the response as text
+  
+   
+  
+      // Handle success
+      const data = JSON.parse(responseText); // Parse the successful response
+      console.log("Application submitted successfully:", data);
+  
+      resetForm();
+      setEmailVerified(false);
+      setPhoneVerified(false);
+      onClose();
+      alert("Application submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting application:", error);
+  
+      if (error instanceof Error) {
+        setFieldError('submit', error.message);
+      } else {
+        setFieldError('submit', 'An unexpected error occurred. Please try again.');
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+  
+  
+  
+  
  
 
   return (

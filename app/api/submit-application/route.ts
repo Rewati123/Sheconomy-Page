@@ -46,7 +46,12 @@ export async function POST(req: NextRequest) {
     // Return success response
     return NextResponse.json({ message: 'Application submitted successfully', application }, { status: 201 })
   } catch (error) {
-    console.error('Error submitting application:', error)
-    return NextResponse.json({ message: 'Error submitting application' }, { status: 500 })
+    if (error instanceof Error) {
+      console.error('Error submitting application:', error.message);
+    } else {
+      console.error('Unknown error occurred:', error);
+    }
+    return NextResponse.json({ message: 'Error submitting application' }, { status: 500 });
   }
+  
 }

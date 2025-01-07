@@ -92,3 +92,11 @@ model UserQuizResult {
   completed DateTime @default(now())
 }
 
+model OTP {
+  id         Int      @id @default(autoincrement())
+  type       String
+  value      String
+  otp        String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+}
