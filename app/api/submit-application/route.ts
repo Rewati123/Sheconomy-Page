@@ -38,7 +38,12 @@ export async function POST(req: NextRequest) {
         password: hashedPassword,
         applicationId: application.id,
       },
-    })
+    });
+    
+    if (!user) {
+      return NextResponse.json({ message: 'Error creating user' }, { status: 500 });
+    }
+    
 
     // Send welcome email with temporary password
     await sendWelcomeEmail(email, fullName, temporaryPassword)

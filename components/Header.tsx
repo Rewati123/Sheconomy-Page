@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-
+import { FaUserCircle } from 'react-icons/fa';
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -19,11 +19,14 @@ export default function Header() {
     
       {/* Desktop and larger screens navigation */}
       <nav className="hidden lg:flex gap-8">
-        <Link href="/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
-        <Link href="#benefits" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
+        <Link href="/https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
+        <Link href="/https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
         <Link href="#apply" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
-        <Link href="learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
-        <Link href="#" className="text-gray-600 font-bold hover:text-gray-900">My Account</Link>
+        <Link href="/learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
+        <Link href="#" className="flex items-center space-x-2 text-gray-600 font-bold hover:text-gray-900">
+  <FaUserCircle className="w-6 h-6 text-gray-700" />
+  <span>My Account</span>
+</Link>
       </nav>
 
       {/* Talk With Us Button - Hidden on small screens, visible on desktop */}
@@ -58,7 +61,10 @@ export default function Header() {
             <Link href="#benefits" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
             <Link href="#apply" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
             <Link href="learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
-            <Link href="#" className="text-gray-600 font-bold hover:text-gray-900">My Account</Link>
+            <Link href="#" className="flex items-center space-x-2 text-gray-600 font-bold hover:text-gray-900">
+  <FaUserCircle className="w-6 h-6 text-gray-700" />
+  <span>My Account</span>
+</Link>
             <Link href="tel:+91 8448991178">
               <Button
                 variant="default"

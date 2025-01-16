@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { X } from 'lucide-react'
-
+import { redirect } from 'next/navigation';
 import { applicationSchema, type ApplicationFormValues } from "../utils/validation-schema"
 import OTPVerification from "./OTPVerification"
 import 'react-phone-input-2/lib/style.css';

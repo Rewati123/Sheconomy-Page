@@ -21,7 +21,7 @@ const page = () => {
 
 
         <div className=' mt-52'>
-   <Testimonials />
+          <Testimonials />
         </div>
        
             <Partners />

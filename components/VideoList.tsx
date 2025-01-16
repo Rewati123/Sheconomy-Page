@@ -26,12 +26,14 @@ export default function VideoList({ videos, userId }: VideoListProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, videoId, progress: 100, completed: true }),
       })
-      // Update local state
+ 
       setCurrentVideo((prev) => 
         prev && prev.id === videoId 
           ? { ...prev, progress: [{ ...prev.progress[0], progress: 100, completed: true }] }
           : prev
       )
+
+     
       // Fetch quiz for the video
       const quizResponse = await fetch(`/api/get-quiz?videoId=${videoId}`)
       const quizData = await quizResponse.json()

@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-
 import prisma from '../../../lib/prisma';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../auth/[...nextauth]';
+import { authOptions } from '../auth/[...nextauth]/route';
 import { sendVideoCompletionEmail, sendAdminNotification } from '../../../utils/emailUtils';
 
 export async function POST(req: Request) {
@@ -14,16 +13,20 @@ export async function POST(req: Request) {
 
   const { userId, videoId, progress, completed } = await req.json();
 
+  // Validate incoming payload
   if (!userId || !videoId || progress === undefined || completed === undefined) {
     return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
   }
 
   try {
+    const userIdAsNumber = Number(userId); // Ensure userId is a number
+    const videoIdAsNumber = Number(videoId); // Ensure videoId is a number
+
     const updatedProgress = await prisma.videoProgress.upsert({
       where: {
         userId_videoId: {
-          userId,
-          videoId,
+          userId: userIdAsNumber,
+          videoId: videoIdAsNumber,
         },
       },
       update: {
@@ -31,32 +34,28 @@ export async function POST(req: Request) {
         completed,
       },
       create: {
-        userId,
-        videoId,
+        userId: userIdAsNumber,
+        videoId: videoIdAsNumber,
         progress,
         completed,
+        updatedAt: new Date(), // Ensure updatedAt is valid
       },
     });
 
     if (completed) {
       const user = await prisma.user.findUnique({
-        where: { id: userId },
+        where: { id: userIdAsNumber },
         include: { application: true },
       });
 
       const video = await prisma.video.findUnique({
-        where: { id: videoId },
+        where: { id: videoIdAsNumber },
       });
 
-      
-
       if (user && video) {
-       
-      
         await sendVideoCompletionEmail(user.email, user.application.fullName, video.title);
         await sendAdminNotification(user.email, user.application.fullName, video.title);
       }
-      
     }
 
     return NextResponse.json({
@@ -65,9 +64,6 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     console.error('Error updating video progress:', error);
-    return NextResponse.json(
-      { message: 'Error updating video progress' },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: 'Error updating video progress' }, { status: 500 });
   }
 }

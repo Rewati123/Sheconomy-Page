@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next' // Correct import
-import { authOptions } from '../auth/[...nextauth]' // Assuming authOptions are correct for your project
+import { authOptions } from '../auth/[...nextauth]/route' // Assuming authOptions are correct for your project
 import prisma from '../../../lib/prisma'
 import PDFDocument from 'pdfkit'
 

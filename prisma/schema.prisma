@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -24,6 +24,7 @@ model User {
   id             Int       @id @default(autoincrement())
   email          String    @unique
   password       String
+  temporaryPassword String?
   application    Application @relation(fields: [applicationId], references: [id])
   applicationId  Int       @unique
   createdAt      DateTime  @default(now())
@@ -38,10 +39,11 @@ model Video {
   description String
   url         String
   createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  progress    VideoProgress[]
-  quiz        Quiz?
+  updatedAt   DateTime  @updatedAt // Automatically set to current timestamp when updated
+  progress    VideoProgress[]  // relation to progress
+  quiz        Quiz?            // relation to quiz (optional)
 }
+
 
 model VideoProgress {
   id        Int      @id @default(autoincrement())
@@ -99,4 +101,10 @@ model OTP {
   otp        String
   expiresAt  DateTime
   createdAt  DateTime @default(now())
+}
+model TemporaryUser {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
 }

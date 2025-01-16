@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '../../../lib/prisma'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../auth/[...nextauth]'
+import { authOptions } from '../auth/[...nextauth]/route'
 
 export async function GET(req: NextRequest) {
   // Extract videoId from query parameters using .get() method
