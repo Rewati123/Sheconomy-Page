@@ -108,3 +108,37 @@ model TemporaryUser {
   password  String
   createdAt DateTime @default(now())
 }
+// model Programs {
+//   id                 Int           @id @default(autoincrement())
+//   title              String
+//   subtitle           String
+//   shortDescription   String
+//   description        String
+//   idealForDescription String
+//   timelineDescription String
+//   startDate          DateTime
+//   endDate            DateTime
+//   image              String?
+//   benefits           Benefits[]
+//   testimonials       Testimonials[]
+// }
+
+// model Benefits {
+//   id          Int      @id @default(autoincrement())
+//   programId   Int
+//   program     Programs  @relation(fields: [programId], references: [id])
+//   icon        String?
+//   title       String
+//   description String
+// }
+
+// model Testimonials {
+//   id          Int      @id @default(autoincrement())
+//   programId   Int
+//   program     Programs  @relation(fields: [programId], references: [id])
+//   name        String
+//   profile     String?
+//   designation String
+//   message     String
+// }
+

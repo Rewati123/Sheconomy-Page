@@ -19,7 +19,7 @@ export default function Header() {
     
       {/* Desktop and larger screens navigation */}
       <nav className="hidden lg:flex gap-8">
-        <Link href="/https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
+        <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
         <Link href="/https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
         <Link href="#apply" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
         <Link href="/learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
