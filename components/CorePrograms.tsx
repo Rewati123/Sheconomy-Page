@@ -31,7 +31,7 @@ router.push('/program')
             {/* Image 1 */}
             <div className="flex flex-col items-center text-center"  onClick={WomenEntrepreneurship}>
               <img
-                src="/program1.png" // Replace with actual image path
+                src="/program1.png" 
                 alt="Program 1"
                 className="w-50 h-40 object-cover mb-4 rounded-lg" 
               />
