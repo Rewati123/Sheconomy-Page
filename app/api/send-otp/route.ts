@@ -14,11 +14,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
-    // Generate OTP
     const otp = generateOTP();
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // OTP valid for 10 minutes
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); 
 
-    // Store OTP in the database
+
     await prisma.oTP.create({
       data: {
         type,
@@ -28,7 +27,7 @@ export async function POST(request: Request) {
       },
     });
 
-    // Send OTP via email or SMS
+
     if (type === 'email') {
       await sendOTPEmail(value, otp);
     } else if (type === 'phone') {

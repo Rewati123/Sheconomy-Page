@@ -4,14 +4,14 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../auth/[...nextauth]/options'
 
 export async function GET(req: NextRequest) {
-  // Extract videoId from query parameters using .get() method
+
   const videoId = req.nextUrl.searchParams.get('videoId')
 
   if (!videoId) {
     return NextResponse.json({ message: 'Missing videoId' }, { status: 400 })
   }
 
-  const session = await getServerSession({ req, ...authOptions }) // Adjusted this to use an object with 'req'
+  const session = await getServerSession({ req, ...authOptions }) 
 
   if (!session) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })

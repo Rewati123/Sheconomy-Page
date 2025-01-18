@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
-    // Fetch the OTP record from the database
+
     const storedData = await prisma.oTP.findFirst({
       where: { type, value },
     });
