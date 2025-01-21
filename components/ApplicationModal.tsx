@@ -63,12 +63,12 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
         body: JSON.stringify(values),
       });
   
-      const responseText = await response.text(); // Read the response as text
+      const responseText = await response.text(); 
   
    
   
-      // Handle success
-      const data = JSON.parse(responseText); // Parse the successful response
+      const data = JSON.parse(responseText); 
+      
       console.log("Application submitted successfully:", data);
   
       resetForm();

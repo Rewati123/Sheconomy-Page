@@ -10,11 +10,11 @@ export function CenteredContentWithLogos() {
   return (
     <div className="flex flex-col items-center w-full mx-auto p-8">
       <div className="relative w-full mb-16">
-        {/* Full-width border stretching across the entire screen */}
+    
         <div className="border-b-4 border-[#D41461] w-full absolute top-1/2 left-0 transform -translate-y-1/2"></div>
 
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 mb-20"> 
-  <div className="w-64 sm:w-96 md:w-[600px] lg:w-[800px]"> {/* Updated width for larger size */}
+  <div className="w-64 sm:w-96 md:w-[600px] lg:w-[800px]"> 
     <Image
       src="/she logo 2.png"
       alt="Centered Image"
@@ -27,25 +27,25 @@ export function CenteredContentWithLogos() {
 
       </div>
 
-      {/* Text moved down with margin-top */}
+
       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-[#D41461] mt-12 mb-16">
         Empowering Partners
       </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-8">
-        {/* Logo 1 (smaller) */}
+    
         <div className="flex justify-center mb-6 w-24 sm:w-32 md:w-40">
           <Image
             key={0} 
             src={logos[0].src}
             alt={logos[0].alt}
-            width={180}  // Smaller size
-            height={180} // Smaller size
+            width={180}  
+            height={180} 
             className="rounded-full"
           />
         </div>
 
-        {/* Logo 2 (default size) */}
+ 
         <div className="flex justify-center mb-6 w-32 sm:w-48 md:w-64">
           <Image
             key={1} 
@@ -57,7 +57,6 @@ export function CenteredContentWithLogos() {
           />
         </div>
 
-        {/* Logo 3 (smaller) */}
         <div className="flex justify-center mb-6 w-24 sm:w-32 md:w-40">
           <Image
             key={2} 
