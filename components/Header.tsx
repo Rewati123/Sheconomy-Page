@@ -17,7 +17,7 @@ export default function Header() {
         />
       </Link>
     
-      {/* Desktop and larger screens navigation */}
+    
       <nav className="hidden lg:flex gap-8">
         <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
         <Link href="/https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
@@ -29,7 +29,7 @@ export default function Header() {
 </Link>
       </nav>
 
-      {/* Talk With Us Button - Hidden on small screens, visible on desktop */}
+ 
       <div className="hidden lg:block">
         <Link href="tel:+91 8448991178">
           <Button
@@ -41,7 +41,7 @@ export default function Header() {
         </Link>
       </div>
 
-      {/* Mobile Navigation (Hamburger Menu) */}
+  
       <div className="lg:hidden flex items-center">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -53,14 +53,14 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+ 
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-md z-10">
           <nav className="flex flex-col items-center gap-4 p-4">
-            <Link href="#about" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
+          <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
             <Link href="#benefits" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
             <Link href="#apply" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
-            <Link href="learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
+            <Link href="/learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
             <Link href="#" className="flex items-center space-x-2 text-gray-600 font-bold hover:text-gray-900">
   <FaUserCircle className="w-6 h-6 text-gray-700" />
   <span>My Account</span>
