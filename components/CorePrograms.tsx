@@ -17,17 +17,16 @@ router.push('/program')
   
      
 
-      {/* Card with Images and Text */}
+   
       <div className="flex justify-center">
-        <div className="bg-white rounded-lg shadow-lg p-10 w-full max-w-7xl"> {/* Adjusted card width */}
-          {/* Images and Text */}
+        <div className="bg-white rounded-lg shadow-lg p-10 w-full max-w-7xl"> 
           <h2 className="text-4xl sm:text-4xl font-bold items-center text-center text-[#D41461] mb-8">
         Exploring Core Programs
       </h2>
       <div className="border-b-2 border-[#D41461] w-1/4 mx-auto mb-8"></div>
 
 
-          <div className="flex justify-between gap-4 flex-wrap cursor-pointer"> {/* Reduced gap between images */}
+          <div className="flex justify-between gap-4 flex-wrap cursor-pointer"> 
             {/* Image 1 */}
             <div className="flex flex-col items-center text-center"  onClick={WomenEntrepreneurship}>
               <img
