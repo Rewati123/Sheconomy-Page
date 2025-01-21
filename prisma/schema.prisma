@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+   
 }
 
 datasource db {
@@ -8,137 +9,110 @@ datasource db {
 }
 
 model Application {
-  id           Int      @id @default(autoincrement())
-  fullName     String
-  email        String   @unique
-  phone        String
-  startupName  String
-  description  String
-  profileLink  String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  user         User?
+  id          Int      @id @default(autoincrement())
+  fullName    String
+  email       String   @unique
+  phone       String
+  startupName String
+  description String
+  profileLink String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User?
 }
 
 model User {
-  id             Int       @id @default(autoincrement())
-  email          String    @unique
-  password       String
+  id                Int              @id @default(autoincrement())
+  email             String           @unique
+  password          String
   temporaryPassword String?
-  application    Application @relation(fields: [applicationId], references: [id])
-  applicationId  Int       @unique
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  videoProgress  VideoProgress[]
-  quizResults    UserQuizResult[]
+  applicationId     Int              @unique
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  application       Application      @relation(fields: [applicationId], references: [id])
+  quizResults       UserQuizResult[]
+  videoProgress     VideoProgress[]
 }
 
 model Video {
-  id          Int       @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   title       String
   description String
   url         String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt // Automatically set to current timestamp when updated
-  progress    VideoProgress[]  // relation to progress
-  quiz        Quiz?            // relation to quiz (optional)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  quiz        Quiz?
+  progress    VideoProgress[]
 }
-
 
 model VideoProgress {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
   userId    Int
-  video     Video    @relation(fields: [videoId], references: [id])
   videoId   Int
   progress  Float    @default(0)
   completed Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  video     Video    @relation(fields: [videoId], references: [id])
 
   @@unique([userId, videoId])
+  @@index([videoId], map: "VideoProgress_videoId_fkey")
 }
 
 model Quiz {
-  id              Int               @id @default(autoincrement())
-  videoId         Int               @unique
-  video           Video             @relation(fields: [videoId], references: [id])
+  id              Int              @id @default(autoincrement())
+  videoId         Int              @unique
   questions       Question[]
+  video           Video            @relation(fields: [videoId], references: [id])
   userQuizResults UserQuizResult[]
 }
 
-
 model Question {
-  id        Int       @id @default(autoincrement())
-  quizId    Int
-  quiz      Quiz      @relation(fields: [quizId], references: [id])
-  text      String
-  options   Option[]
+  id      Int      @id @default(autoincrement())
+  quizId  Int
+  text    String
+  options Option[]
+  quiz    Quiz     @relation(fields: [quizId], references: [id])
+
+  @@index([quizId], map: "Question_quizId_fkey")
 }
 
 model Option {
   id         Int      @id @default(autoincrement())
   questionId Int
-  question   Question @relation(fields: [questionId], references: [id])
   text       String
   isCorrect  Boolean
+  question   Question @relation(fields: [questionId], references: [id])
+
+  @@index([questionId], map: "Option_questionId_fkey")
 }
 
 model UserQuizResult {
   id        Int      @id @default(autoincrement())
   userId    Int
-  user      User     @relation(fields: [userId], references: [id])
   quizId    Int
-  quiz      Quiz     @relation(fields: [quizId], references: [id])
   score     Int
   completed DateTime @default(now())
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([quizId], map: "UserQuizResult_quizId_fkey")
+  @@index([userId], map: "UserQuizResult_userId_fkey")
 }
 
 model OTP {
-  id         Int      @id @default(autoincrement())
-  type       String
-  value      String
-  otp        String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  type      String
+  value     String
+  otp       String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }
+
 model TemporaryUser {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
 }
-// model Programs {
-//   id                 Int           @id @default(autoincrement())
-//   title              String
-//   subtitle           String
-//   shortDescription   String
-//   description        String
-//   idealForDescription String
-//   timelineDescription String
-//   startDate          DateTime
-//   endDate            DateTime
-//   image              String?
-//   benefits           Benefits[]
-//   testimonials       Testimonials[]
-// }
-
-// model Benefits {
-//   id          Int      @id @default(autoincrement())
-//   programId   Int
-//   program     Programs  @relation(fields: [programId], references: [id])
-//   icon        String?
-//   title       String
-//   description String
-// }
-
-// model Testimonials {
-//   id          Int      @id @default(autoincrement())
-//   programId   Int
-//   program     Programs  @relation(fields: [programId], references: [id])
-//   name        String
-//   profile     String?
-//   designation String
-//   message     String
-// }
-
