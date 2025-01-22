@@ -59,7 +59,7 @@ export default function Testimonials() {
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-2">Listen From Our Entrepreneurs</h2>
         <div className="border-b-2 border-[#D41461] w-3/4 sm:w-1/2 mx-auto mb-8"></div>
 
-        {/* Carousel */}
+   
         <div className="relative">
           <div className="w-full max-w-4xl mx-auto overflow-hidden">
             <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
@@ -84,7 +84,7 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* Carousel Controls */}
+        
           <div className="absolute top-1/2 left-0 sm:-left-6 transform -translate-y-1/2">
             <button 
               onClick={prevTestimonial} 

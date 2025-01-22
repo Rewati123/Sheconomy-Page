@@ -21,7 +21,7 @@ export default function Timeline() {
         {/* Paragraphs Section */}
         <div className="max-w-6xl mx-auto">
   <p className="text-xl sm:text-2xl lg:text-3xl leading-relaxed mt-4 text-justify">
-    Getting started with the Women in Digital Startup Program is simple! Submit your application online by 10th Jan, 2025.
+    Getting started with the Women in Digital Startup Program is simple! Submit your application online by 20th Feb, 2025.
   </p>
   <p className="text-xl sm:text-2xl lg:text-3xl leading-relaxed mt-4 text-justify">
     Our team will review submissions and shortlist candidates based on their vision, innovation, and potential. The program kicks off on 29th Dec, 2024, with engaging workshops, mentorship sessions, and hands-on support.
@@ -47,7 +47,7 @@ export default function Timeline() {
                 <img src="/start-end.png" alt="End Date Icon" className="w-16 sm:w-18 h-auto" />
                 <div>
                   <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-2">Enrollment Ends on</CardTitle>
-                  <p className="text-lg sm:text-xl lg:text-2xl text-gray-600">30th Jan 2025</p>
+                  <p className="text-lg sm:text-xl lg:text-2xl text-gray-600">20th Feb 2025</p>
                 </div>
               </div>
 
