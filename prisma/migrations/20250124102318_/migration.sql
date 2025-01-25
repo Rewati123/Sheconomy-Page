@@ -51,6 +51,7 @@ CREATE TABLE `VideoProgress` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `VideoProgress_videoId_fkey`(`videoId`),
     UNIQUE INDEX `VideoProgress_userId_videoId_key`(`userId`, `videoId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -70,6 +71,7 @@ CREATE TABLE `Question` (
     `quizId` INTEGER NOT NULL,
     `text` VARCHAR(191) NOT NULL,
 
+    INDEX `Question_quizId_fkey`(`quizId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -80,6 +82,7 @@ CREATE TABLE `Option` (
     `text` VARCHAR(191) NOT NULL,
     `isCorrect` BOOLEAN NOT NULL,
 
+    INDEX `Option_questionId_fkey`(`questionId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -91,6 +94,8 @@ CREATE TABLE `UserQuizResult` (
     `score` INTEGER NOT NULL,
     `completed` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
+    INDEX `UserQuizResult_quizId_fkey`(`quizId`),
+    INDEX `UserQuizResult_userId_fkey`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -117,6 +122,58 @@ CREATE TABLE `TemporaryUser` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `Program` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(191) NOT NULL,
+    `subtitle` VARCHAR(191) NOT NULL,
+    `short_description` TEXT NOT NULL,
+    `description` TEXT NOT NULL,
+    `ideal_For_Description` TEXT NOT NULL,
+    `timeline_Description` TEXT NOT NULL,
+    `start_Date` DATETIME(3) NOT NULL,
+    `end_Date` DATETIME(3) NOT NULL,
+    `image` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Benefit` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `programId` INTEGER NOT NULL,
+    `icon` VARCHAR(255) NULL,
+    `title` VARCHAR(191) NOT NULL,
+    `description` TEXT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Seo` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `meta_title` VARCHAR(255) NULL,
+    `meta_description` TEXT NULL,
+    `meta_keywords` TEXT NULL,
+    `og_images` LONGTEXT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Testimonial` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `programId` INTEGER NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `profile` VARCHAR(255) NULL,
+    `designation` VARCHAR(255) NULL,
+    `message` TEXT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `User` ADD CONSTRAINT `User_applicationId_fkey` FOREIGN KEY (`applicationId`) REFERENCES `Application`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -136,7 +193,7 @@ ALTER TABLE `Question` ADD CONSTRAINT `Question_quizId_fkey` FOREIGN KEY (`quizI
 ALTER TABLE `Option` ADD CONSTRAINT `Option_questionId_fkey` FOREIGN KEY (`questionId`) REFERENCES `Question`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `UserQuizResult` ADD CONSTRAINT `UserQuizResult_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `UserQuizResult` ADD CONSTRAINT `UserQuizResult_quizId_fkey` FOREIGN KEY (`quizId`) REFERENCES `Quiz`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `UserQuizResult` ADD CONSTRAINT `UserQuizResult_quizId_fkey` FOREIGN KEY (`quizId`) REFERENCES `Quiz`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `UserQuizResult` ADD CONSTRAINT `UserQuizResult_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

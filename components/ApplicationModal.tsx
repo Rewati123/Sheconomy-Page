@@ -8,7 +8,7 @@ import { applicationSchema, type ApplicationFormValues } from "../utils/validati
 import OTPVerification from "./OTPVerification"
 import 'react-phone-input-2/lib/style.css';
 import PhoneInput from "react-phone-input-2";
-
+import SuccessModal from "./SuccessModel";
 import { CheckCircle } from "lucide-react";
 interface ApplicationModalProps {
   isOpen: boolean
@@ -20,7 +20,7 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
 
   const [emailVerified, setEmailVerified] = useState(false)
   const [phoneVerified, setPhoneVerified] = useState(false)
- 
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -95,7 +95,9 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
  
 
   return (
-    <div 
+   <>
+   
+   <div 
       className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
@@ -275,5 +277,12 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
         </div>
       </div>
     </div>
+   
+    <SuccessModal 
+        isOpen={showSuccessModal} 
+        onClose={() => setShowSuccessModal(false)} 
+      />
+   
+   </>
   )
 }

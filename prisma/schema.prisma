@@ -6,6 +6,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+
 }
 
 model Application {
@@ -115,4 +116,41 @@ model TemporaryUser {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+}
+model Program {
+  id                  Int      @id @default(autoincrement())
+  title               String
+  subtitle            String
+  short_description   String   @db.Text
+  description         String   @db.Text
+  ideal_For_Description String @db.Text
+  timeline_Description String @db.Text
+  start_Date          DateTime
+  end_Date            DateTime
+  image               String
+}
+model Benefit {
+  id          Int      @id @default(autoincrement())
+  programId   Int
+  icon        String?  @db.VarChar(255)
+  title       String
+  description String?  @db.Text
+}
+model Seo {
+  id              Int      @id @default(autoincrement())
+  meta_title      String?  @db.VarChar(255)
+  meta_description String? @db.Text
+  meta_keywords   String?  @db.Text
+  og_images       String?  @db.LongText
+  og_title          String?  @db.VarChar(255)
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now()) @updatedAt
+}
+model Testimonial {
+  id          Int     @id @default(autoincrement())
+  programId   Int
+  name        String  @db.VarChar(255)
+  profile     String? @db.VarChar(255)
+  designation String? @db.VarChar(255)
+  message     String? @db.Text
 }
