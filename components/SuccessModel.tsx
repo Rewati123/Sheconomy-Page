@@ -6,10 +6,11 @@ import { useEffect } from 'react'
 
 interface SuccessModalProps {
   isOpen: boolean
-  onClose: () => void
+  onClose: () => void;
+  setShowSuccessModal:(boolean)=>void;
 }
 
-export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
+export default function SuccessModal({ isOpen, onClose,setShowSuccessModal }: SuccessModalProps) {
   useEffect(() => {
     if (isOpen) {
       confetti({
@@ -27,7 +28,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg max-w-lg w-full p-6 relative">
         <button
-          onClick={onClose}
+          onClick={()=>{setShowSuccessModal(false)}}
           className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
           aria-label="Close modal"
         >

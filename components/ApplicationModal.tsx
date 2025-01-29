@@ -10,17 +10,20 @@ import 'react-phone-input-2/lib/style.css';
 import PhoneInput from "react-phone-input-2";
 import confetti from "canvas-confetti"
 import { CheckCircle } from "lucide-react";
+
 interface ApplicationModalProps {
   isOpen: boolean
-  onClose: () => void
+  onClose: () => void;
+  showSuccessModal:boolean;
+  setShowSuccessModal:(boolean)=>void;
 }
 
-export default function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
+export default function ApplicationModal({ isOpen, onClose,showSuccessModal,setShowSuccessModal }: ApplicationModalProps) {
 
 
   const [emailVerified, setEmailVerified] = useState(false)
   const [phoneVerified, setPhoneVerified] = useState(false)
-  const [showSuccessModal, setShowSuccessModal] = useState(false)
+  // const [showSuccessModal, setShowSuccessModal] = useState(false)
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -67,15 +70,13 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
   
    
   
-      const data = JSON.parse(responseText); 
+      const data = JSON.parse(responseText);
       
-      console.log("Application submitted successfully:", data);
   
       resetForm();
       setEmailVerified(false);
       setPhoneVerified(false);
-      onClose();
-      setShowSuccessModal(true)
+      setShowSuccessModal(true) 
       confetti({
         particleCount: 100,
         spread: 70,
@@ -288,7 +289,7 @@ export default function ApplicationModal({ isOpen, onClose }: ApplicationModalPr
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg max-w-lg w-full p-6 relative">
             <button
-              onClick={() => setShowSuccessModal(false)}
+              onClick={() => {setShowSuccessModal(false); onClose()}}
               className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
               aria-label="Close modal"
             >

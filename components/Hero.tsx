@@ -1,10 +1,12 @@
 "use client"
+import { useEffect, useRef, useState } from "react"
 
 import { useModal } from "../hooks/use-modal"
 import ApplicationModal from "./ApplicationModal"
 
 export default function Hero() {
   const { isOpen, openModal, closeModal } = useModal()
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
 
   return (
     <section className="flex flex-col-reverse md:flex-row justify-between items-center px-6 md:px-20  bg-white">
@@ -20,7 +22,7 @@ export default function Hero() {
           Zero fees for all women entrepreneurs or businesses led by women
         </p>
         <button
-          onClick={openModal}
+        onClick={()=>{openModal(); setShowSuccessModal(false)}}
           className="bg-[#FF7F42] text-white hover:bg-[#E66A2D] text-xl px-8 py-4 rounded-full transition-colors"
         >
           APPLY NOW
@@ -33,7 +35,7 @@ export default function Hero() {
       </div>
 
       {/* Modal */}
-      <ApplicationModal isOpen={isOpen} onClose={closeModal} />
+      <ApplicationModal isOpen={isOpen} onClose={closeModal} showSuccessModal={showSuccessModal} setShowSuccessModal={setShowSuccessModal}/>
     </section>
   )
 }

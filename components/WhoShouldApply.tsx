@@ -1,4 +1,5 @@
 "use client"
+import { useEffect, useRef, useState } from "react"
 
 import { CheckCircle } from 'lucide-react'
 import { useModal } from "../hooks/use-modal"
@@ -13,7 +14,7 @@ const criteria = [
 
 export default function WhoShouldApply() {
   const { isOpen, openModal, closeModal } = useModal()
-
+const [showSuccessModal, setShowSuccessModal] = useState(false)
   return (
     <section id="apply" className="bg-[#D41461] text-white py-16 px-6">
       <div className="container mx-auto">
@@ -34,7 +35,7 @@ export default function WhoShouldApply() {
             </ul>
             <div className="text-center md:text-left">
               <button
-                onClick={openModal}
+                    onClick={()=>{openModal(); setShowSuccessModal(false)}}
                 className="bg-[#FF7F42] text-white hover:bg-[#E66A2D] text-xl px-8 py-4 rounded-full transition-colors"
               >
                 APPLY NOW
@@ -48,7 +49,7 @@ export default function WhoShouldApply() {
           </div>
         </div>
       </div>
-      <ApplicationModal isOpen={isOpen} onClose={closeModal} />
+    <ApplicationModal isOpen={isOpen} onClose={closeModal} showSuccessModal={showSuccessModal} setShowSuccessModal={setShowSuccessModal}/>
     </section>
   )
 }

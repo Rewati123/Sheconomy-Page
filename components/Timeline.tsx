@@ -1,4 +1,5 @@
 "use client"
+import { useEffect, useRef, useState } from "react"
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useModal } from "../hooks/use-modal"
@@ -6,6 +7,7 @@ import ApplicationModal from "./ApplicationModal"
 
 export default function Timeline() {
   const { isOpen, openModal, closeModal } = useModal()
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
 
   return (
     <section id="timeline" className="py-16 bg-white px-6 sm:px-8 lg:px-12">
@@ -54,7 +56,7 @@ export default function Timeline() {
               {/* Apply Now Button */}
               <div className="mt-8 sm:mt-0 w-full sm:w-auto">
                 <Button
-                  onClick={openModal}
+                  onClick={()=>{openModal(); setShowSuccessModal(false)}}
                   size="lg"
                   className="bg-[#FF7F42] text-white hover:bg-[#E66A2D] text-xl px-8 py-6 rounded-full w-full sm:w-[250px]"
                 >
@@ -67,7 +69,8 @@ export default function Timeline() {
       </div>
 
       {/* Application Modal */}
-      <ApplicationModal isOpen={isOpen} onClose={closeModal} />
+      <ApplicationModal isOpen={isOpen} onClose={closeModal} showSuccessModal={showSuccessModal} setShowSuccessModal={setShowSuccessModal}/>
+
     </section>
   )
 }
