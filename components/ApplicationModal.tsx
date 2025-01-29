@@ -179,7 +179,7 @@ export default function ApplicationModal({ isOpen, onClose,showSuccessModal,setS
                     Phone Number *
                   </label>
                   <PhoneInput
-                    country={"in"} // Default country code
+                    country={"us"} // Default country code
                     value={values.phone}
                     onChange={(phone) => setFieldValue("phone", phone)}
                     inputProps={{
