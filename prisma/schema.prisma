@@ -128,6 +128,8 @@ model Program {
   start_Date          DateTime
   end_Date            DateTime
   image               String
+  benefits              Benefit[]
+testimonials          Testimonial[]
 }
 model Benefit {
   id          Int      @id @default(autoincrement())
@@ -135,6 +137,19 @@ model Benefit {
   icon        String?  @db.VarChar(255)
   title       String
   description String?  @db.Text
+
+  Program Program[]
+}
+
+model Testimonial {
+  id          Int     @id @default(autoincrement())
+  programId   Int
+  name        String  @db.VarChar(255)
+  profile     String? @db.VarChar(255)
+  designation String? @db.VarChar(255)
+  message     String? @db.Text
+
+  Program Program[]
 }
 model Seo {
   id              Int      @id @default(autoincrement())
@@ -145,12 +160,4 @@ model Seo {
   og_title        String?  @db.VarChar(255)
   created_at      DateTime @default(now())
   updated_at      DateTime @default(now()) @updatedAt
-}
-model Testimonial {
-  id          Int     @id @default(autoincrement())
-  programId   Int
-  name        String  @db.VarChar(255)
-  profile     String? @db.VarChar(255)
-  designation String? @db.VarChar(255)
-  message     String? @db.Text
 }

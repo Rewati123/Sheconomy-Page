@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 
 const phoneRegExp = /^\+?[1-9]\d{1,14}$/
-
+const profileLinkRegExp = /^https:\/\/community\.sheconomy\.in\/[a-zA-Z0-9]+$/;
 export const applicationSchema = Yup.object().shape({
   fullName: Yup.string()
     .min(2, 'Name is too short')
@@ -28,7 +28,9 @@ export const applicationSchema = Yup.object().shape({
     .max(500, 'Description must not exceed 500 characters')
     .required('Description is required'),
   profileLink: Yup.string()
-    .url('Invalid URL')
+    // .url('Invalid URL')
+    // .required('Profile link is required'),
+    .matches(profileLinkRegExp, 'Profile link must be in the format: https://community.sheconomy.in/username')
     .required('Profile link is required'),
  
 })
