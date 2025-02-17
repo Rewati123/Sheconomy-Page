@@ -15,15 +15,15 @@ export default function LoginPage() {
     try {
       console.log("Attempting to sign in with:", email, password) 
       
-      // Correct provider name 'credentials'
+  
       const result = await signIn('credentials', {
-        redirect: false, // Don't automatically redirect
+        redirect: false, 
         email,
         password,
-        callbackUrl: '/dashboard', // Define the desired redirect URL after login
+        callbackUrl: '/dashboard',
       })
       
-      console.log("SignIn Result:", result) // Debug log
+      console.log("SignIn Result:", result) 
     
      
 if (result?.error) {
@@ -58,7 +58,7 @@ if (result?.error) {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
-          <div className="rounded-md shadow-sm space-y-4"> {/* Added space-y-4 for space between inputs */}
+          <div className="rounded-md shadow-sm space-y-4"> 
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
