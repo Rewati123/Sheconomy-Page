@@ -19,9 +19,9 @@ export default function Comprehensive() {
             {/* Image 1 */}
             <div className="flex flex-col items-center text-center">
               <img
-                src="/core-program.png" // Replace with actual image path
+                src="/core-program.png" 
                 alt="Program 1"
-                className="w-50 h-40 object-cover mb-4 rounded-lg" // Image size
+                className="w-50 h-40 object-cover mb-4 rounded-lg" 
               />
               <p className="text-sm text-gray-700 font-semibold">Women
 Entrepreneurship
@@ -36,9 +36,9 @@ Duration: 53 Mint
             {/* Image 2 */}
             <div className="flex flex-col items-center text-center">
               <img
-                src="/core-program.png" // Replace with actual image path
+                src="/core-program.png" 
                 alt="Program 2"
-                className="w-w-50 h-40 object-cover mb-4 rounded-lg" // Image size
+                className="w-w-50 h-40 object-cover mb-4 rounded-lg" 
               />
           <p className="text-sm text-gray-700 font-semibold">Women Creators
           Course</p>
@@ -46,24 +46,24 @@ Duration: 53 Mint
 
             </div>
 
-            {/* Image 3 */}
+          
             <div className="flex flex-col items-center text-center">
               <img
-                src="/core-program.png" // Replace with actual image path
+                src="/core-program.png" 
                 alt="Program 3"
-                className="w-w-50 h-40 object-cover mb-4 rounded-lg" // Image size
+                className="w-w-50 h-40 object-cover mb-4 rounded-lg" 
               />
               <p className="text-sm text-gray-700 font-semibold">Women Global
               Networking Course </p>
               <p className="text-sm text-gray-700 font-semibold">Duration: 53 Mint</p>
             </div>
 
-            {/* Image 4 */}
+          
             <div className="flex flex-col items-center text-center">
               <img
-                src="/core-program.png" // Replace with actual image path
+                src="/core-program.png" 
                 alt="Program 4"
-                className="w-w-50 h-40 object-cover mb-4 rounded-lg" // Image size
+                className="w-w-50 h-40 object-cover mb-4 rounded-lg" 
               />
               <p className="text-sm text-gray-700 font-semibold">Women Job Seekers
               Course
