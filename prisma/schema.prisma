@@ -151,7 +151,7 @@ model Testimonial {
 
   Program Program[]
 }
-model Seo {
+model seo {
   id              Int      @id @default(autoincrement())
   meta_title      String?  @db.VarChar(255)
   meta_description String? @db.Text

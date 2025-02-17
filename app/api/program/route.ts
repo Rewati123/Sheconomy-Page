@@ -20,7 +20,7 @@ export async function GET(request) {
     console.error('Error fetching program data:', error);
     return NextResponse.json({ message: 'Error fetching program data' }, { status: 500 });
   } finally {
-    // Make sure to disconnect Prisma Client after the query
+    
     await prisma.$disconnect();
   }
 }

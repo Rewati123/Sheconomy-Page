@@ -1,6 +1,7 @@
 
 "use client"
 
+"use client"
 
 import { Inter } from 'next/font/google'
 import Header from '../components/Header'
@@ -35,28 +36,53 @@ export default function RootLayout({
     fetchSeoData()
   }, [])
 
+  // Log the parsed image URL only if seoData is available
+  useEffect(() => {
+    if (seoData?.og_images) {
+      try {
+        const parsedImageUrl = JSON.parse(seoData.og_images)[0];
+        console.log("🖼️ Parsed Image URL:", parsedImageUrl);
+      } catch (err) {
+        console.error("🚨 Error parsing og_images:", err);
+      }
+    }
+  }, [seoData]);
+
   return (
     <>
       <html lang="en">
         <head>
-        {seoData && (
+          {seoData && (
             <>
               <title>{seoData.meta_title}</title>
               <meta name="description" content={seoData.meta_description} />
               <meta name="keywords" content={seoData.meta_keywords} />
-              <meta property="og:image" content={JSON.parse(seoData.og_images)} />
+              
+              {seoData.og_images && console.log("🖼️ og_images:", seoData.og_images)}
+              <meta property="og:image" content={seoData.og_images ? JSON.parse(seoData.og_images)[0] : ''} />
               <meta property="og:title" content={seoData.og_title} />
-            
               <link rel="canonical" href="https://www.sheconomy.in" />
             </>
           )}
         </head>
+
         <body className={inter.className}>
           <Header />
           {children}
+
+          {/* Image Display in Body (✅ Correct Place) */}
+          {seoData?.og_images && (
+            <img 
+              src={JSON.parse(seoData.og_images)[0]} 
+              alt="SEO Image" 
+              className="w-full h-auto"
+            />
+          )}
+
           <Footer />
         </body>
       </html>
     </>
   )
 }
+
