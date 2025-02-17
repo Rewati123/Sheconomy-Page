@@ -5,6 +5,7 @@ export function CenteredContentWithLogos() {
     { src: '/logo_2.png', alt: 'Logo 1' },
     { src: '/logo_3.png', alt: 'Logo 2' },
     { src: '/logo_1.png', alt: 'Logo 3' },
+    {src: "/all_logo1.png", alt: 'Logo 4'}
   ]
 
   return (
@@ -57,16 +58,32 @@ export function CenteredContentWithLogos() {
           />
         </div>
 
+        <div className="flex justify-center mb-6 w-40 sm:w-48 md:w-56">
+  <Image
+    key={2} 
+    src={logos[3].src}
+    alt={logos[3].alt}
+    width={320}  // Increased width
+    height={320} // Increased height
+    className="rounded-full"
+  />
+</div>
+
+
         <div className="flex justify-center mb-6 w-24 sm:w-32 md:w-40">
           <Image
             key={2} 
             src={logos[2].src}
             alt={logos[2].alt}
-            width={180}  // Smaller size
-            height={180} // Smaller size
+            width={180}  
+            height={180} 
             className="rounded-full"
           />
         </div>
+
+
+
+
       </div>
     </div>
   )

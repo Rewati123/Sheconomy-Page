@@ -69,16 +69,6 @@ export default function RootLayout({
         <body className={inter.className}>
           <Header />
           {children}
-
-          {/* Image Display in Body (✅ Correct Place) */}
-          {seoData?.og_images && (
-            <img 
-              src={JSON.parse(seoData.og_images)[0]} 
-              alt="SEO Image" 
-              className="w-full h-auto"
-            />
-          )}
-
           <Footer />
         </body>
       </html>
