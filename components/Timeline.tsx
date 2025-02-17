@@ -17,10 +17,10 @@ export default function Timeline() {
           Application Process & Timeline
         </h2>
 
-        {/* Line Under the Heading */}
+     
         <div className="border-b-4 border-[#D41461] w-1/2 sm:w-1/3 mx-auto mb-8"></div>
 
-        {/* Paragraphs Section */}
+
         <div className="max-w-6xl mx-auto">
   <p className="text-xl sm:text-2xl lg:text-3xl leading-relaxed mt-4 text-justify">
     Getting started with the Women in Digital Startup Program is simple! Submit your application online by 20th Feb, 2025.
@@ -31,7 +31,7 @@ export default function Timeline() {
 </div>
 
 
-        {/* Card with Timeline Information */}
+       
         <Card className="bg-gray-100 duration-300 relative rounded-2xl mt-7">
           <CardContent className="p-6 sm:p-8">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-12">
