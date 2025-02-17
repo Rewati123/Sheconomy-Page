@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 export default function Contact() {
   return (
     <div className="py-8 px-4 sm:px-8 lg:px-12">
-    <section className="bg-[#D41461] rounded-lg px-8 sm:px-16 py-8 max-w-7xl mx-auto"> {/* Width ko increase kiya */}
+    <section className="bg-[#D41461] rounded-lg px-8 sm:px-16 py-8 max-w-7xl mx-auto"> 
       <div className="container mx-auto px-6 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 md:space-x-8">
           <div className="text-left">

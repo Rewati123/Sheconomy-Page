@@ -40,43 +40,7 @@ router.push('/program')
 program
 </p>
             </div>
-{/* 
-            Image 2
-            <div className="flex flex-col items-center text-center">
-              <img
-                src="/core-program.png" // Replace with actual image path
-                alt="Program 2"
-                className="w-w-50 h-40 object-cover mb-4 rounded-lg" // Image size
-              />
-          <p className="text-sm text-gray-700 font-semibold">Women Creators</p>
-<p className="text-sm text-gray-700 font-semibold">Program</p>
 
-            </div>
-
-         
-            <div className="flex flex-col items-center text-center">
-              <img
-                src="/core-program.png" // Replace with actual image path
-                alt="Program 3"
-                className="w-w-50 h-40 object-cover mb-4 rounded-lg" // Image size
-              />
-              <p className="text-sm text-gray-700 font-semibold">Women Global
-              Networking </p>
-              <p className="text-sm text-gray-700 font-semibold"> Program</p>
-            </div>
-
-        
-            <div className="flex flex-col items-center text-center">
-              <img
-                src="/core-program.png" // Replace with actual image path
-                alt="Program 4"
-                className="w-w-50 h-40 object-cover mb-4 rounded-lg" // Image size
-              />
-              <p className="text-sm text-gray-700 font-semibold">Women Job Seekers
-              </p>
-              <p className="text-sm text-gray-700 font-semibold">
-              program</p>
-            </div> */}
           </div>
         </div>
       </div>
