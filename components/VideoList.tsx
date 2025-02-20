@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { Video, VideoProgress } from '@prisma/client'
+import { video, videoProgress } from '@prisma/client'
 import { Quiz } from './Quiz'
 // import { Quiz } from '@/components/Quiz'
 
-interface VideoWithProgress extends Video {
-  progress: VideoProgress[]
+interface VideoWithProgress extends video {
+  progress: videoProgress[]
 }
 
 interface VideoListProps {
