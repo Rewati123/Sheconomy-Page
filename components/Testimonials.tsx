@@ -3,7 +3,16 @@
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-const testimonials = [
+type TestimonialsProps = {
+  testimonialdata?: {
+    name: string;
+    role: string;
+    image: string;
+    quote: string;
+  }[];
+};
+
+const defaultTestimonials = [
   {
     name: "Jaycy Naveen",
     role: "Founder & CEO at MyImaginity, Software and IT Services",
@@ -34,23 +43,25 @@ const testimonials = [
     image: "/Sharmistha Chakraborty 1.png",
     quote: "SHEconomy has been a platform where my expertise in interior design and Vastu flourished. It connects me with like-minded clients, helping me grow professionally while delivering harmonious, thoughtfully planned spaces to those I serve. To be on SHEconomy is a pretty empowering feeling."
   }
-]
+];
 
-export default function Testimonials({testimonial}) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+const Testimonials: React.FC<TestimonialsProps> = ({ testimonialdata }) => {
+  const testimonials = testimonialdata && testimonialdata.length > 0 ? testimonialdata : defaultTestimonials;
+  
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
-  }
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
-  }
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
+  };
 
   useEffect(() => {
-    const interval = setInterval(nextTestimonial, 5000) // Autoplay every 5 seconds
-    return () => clearInterval(interval)
-  }, [])
+    const interval = setInterval(nextTestimonial, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="py-12 md:py-16 bg-gray-100 relative bg-cover bg-center" style={{ backgroundImage: "url('/slider.jpg')" }}>
@@ -59,7 +70,6 @@ export default function Testimonials({testimonial}) {
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-2">Listen From Our Entrepreneurs</h2>
         <div className="border-b-2 border-[#D41461] w-3/4 sm:w-1/2 mx-auto mb-8"></div>
 
-   
         <div className="relative">
           <div className="w-full max-w-4xl mx-auto overflow-hidden">
             <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
@@ -84,7 +94,6 @@ export default function Testimonials({testimonial}) {
             </div>
           </div>
 
-        
           <div className="absolute top-1/2 left-0 sm:-left-6 transform -translate-y-1/2">
             <button 
               onClick={prevTestimonial} 
@@ -105,7 +114,6 @@ export default function Testimonials({testimonial}) {
           </div>
         </div>
 
-        {/* Pagination Dots */}
         <div className="flex justify-center mt-6">
           {testimonials.map((_, index) => (
             <button
@@ -121,3 +129,4 @@ export default function Testimonials({testimonial}) {
   )
 }
 
+export default Testimonials;
