@@ -1,4 +1,41 @@
-import React from 'react'
+// import React from 'react'
+// import Hero from 'components/Hero'
+// import About from 'components/About'
+// import Benefits from 'components/Benefits'
+// import WhoShouldApply from 'components/WhoShouldApply'
+// import Timeline from 'components/Timeline'
+// import Testimonials from 'components/Testimonials'
+// import Partners from 'components/Partners'
+// import Contact from 'components/Contact'
+// import { CenteredContentWithLogos } from 'components/CenteredContentWithLogos'
+// const Programpage = () => {
+//   return (
+//     <>
+    
+//       {/* <Lerniningcenter/> */}
+//       <Hero />
+//       <About />
+//       <Benefits />
+//       <WhoShouldApply />
+//       <Timeline />
+//       <Testimonials />
+//       <Partners />
+//       <Contact />
+//       <div  className='mt-10'>
+//       <CenteredContentWithLogos/>
+//       </div>
+    
+    
+    
+//     </>
+//   )
+// }
+
+// export default Programpage
+"use client"
+
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import Hero from 'components/Hero'
 import About from 'components/About'
 import Benefits from 'components/Benefits'
@@ -8,25 +45,87 @@ import Testimonials from 'components/Testimonials'
 import Partners from 'components/Partners'
 import Contact from 'components/Contact'
 import { CenteredContentWithLogos } from 'components/CenteredContentWithLogos'
-const Programpage = () => {
+import { Program } from '../types/program'
+
+const Programpage: React.FC = () => {
+  const [programData, setProgramData] = useState<Program | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchProgramData = async () => {
+      try {
+        const response = await axios.get('/api/program');
+  
+        console.log("API Response:", response.data); // Debugging
+  
+        if (response.data?.data?.length > 0) {
+          setProgramData(response.data.data[0]); 
+        } else {
+          setError('No program data found');
+        }
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to fetch program data');
+        setLoading(false);
+        console.error('Error fetching program data:', err);
+      }
+    };
+  
+    fetchProgramData();
+  }, []);
+  
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>
+  }
+
+  if (error) {
+    return <div className="min-h-screen flex items-center justify-center text-red-500">{error}</div>
+  }
+
+  if (!programData) {
+    return <div className="min-h-screen flex items-center justify-center">No program data available</div>
+  }
+
   return (
     <>
-    
-      {/* <Lerniningcenter/> */}
-      <Hero />
-      <About />
-      <Benefits />
-      <WhoShouldApply />
-      <Timeline />
-      <Testimonials />
+      <Hero 
+        title={programData.title}
+        subtitle={programData.subtitle}
+        description={programData.shortDescription}  
+        image={programData.image}
+      />
+      
+      <About 
+        description={programData.description} 
+      />
+      
+      <Benefits 
+        benefits={programData.benefits} 
+      />
+      
+      <WhoShouldApply 
+        description={programData.idealForDescription} 
+      />
+      
+      <Timeline 
+        startDate={programData.startDate} 
+        endDate={programData.endDate} 
+        description={programData.timelineDescription} 
+      />
+      
+      <Testimonials 
+        testimonials={programData.testimonials} 
+      />
+      
       <Partners />
+      
       <Contact />
-      <div  className='mt-10'>
-      <CenteredContentWithLogos/>
+      
+      <div className='mt-10'>
+        <CenteredContentWithLogos/>
       </div>
-    
-    
-    
     </>
   )
 }

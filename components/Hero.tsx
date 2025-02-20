@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { useModal } from "../hooks/use-modal"
 import ApplicationModal from "./ApplicationModal"
 
-export default function Hero() {
+export default function Hero({title,subtitle,description,image}) {
   const { isOpen, openModal, closeModal } = useModal()
   const [showSuccessModal, setShowSuccessModal] = useState(false)
 

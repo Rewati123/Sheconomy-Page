@@ -12,7 +12,7 @@ const criteria = [
   'Entrepreneurs eager to break barriers and drive innovation in the tech industry.',
 ]
 
-export default function WhoShouldApply() {
+export default function WhoShouldApply({description}) {
   const { isOpen, openModal, closeModal } = useModal()
 const [showSuccessModal, setShowSuccessModal] = useState(false)
   return (

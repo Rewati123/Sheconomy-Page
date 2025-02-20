@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useModal } from "../hooks/use-modal"
 import ApplicationModal from "./ApplicationModal"
 
-export default function Timeline() {
+export default function Timeline({startDate,endDate,description}) {
   const { isOpen, openModal, closeModal } = useModal()
   const [showSuccessModal, setShowSuccessModal] = useState(false)
 

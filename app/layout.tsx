@@ -51,20 +51,25 @@ export default function RootLayout({
   return (
     <>
       <html lang="en">
-        <head>
-          {seoData && (
-            <>
-              <title>{seoData.meta_title}</title>
-              <meta name="description" content={seoData.meta_description} />
-              <meta name="keywords" content={seoData.meta_keywords} />
-              
-              {seoData.og_images && console.log("🖼️ og_images:", seoData.og_images)}
-              <meta property="og:image" content={seoData.og_images ? JSON.parse(seoData.og_images)[0] : ''} />
-              <meta property="og:title" content={seoData.og_title} />
-              <link rel="canonical" href="https://www.sheconomy.in" />
-            </>
-          )}
-        </head>
+      <head>
+  {seoData && (
+    <>
+      <title>{seoData.meta_title}</title>
+      <meta name="description" content={seoData.meta_description} />
+      <meta name="keywords" content={seoData.meta_keywords} />
+
+      {/* ✅ OG Image को Meta Tag में रखो */}
+      {seoData.og_images && (
+  <meta property="og:image" content={`https://www.sheconomy.in/uploads/${JSON.parse(seoData.og_images)[0]}`} />
+)}
+
+
+      <meta property="og:title" content={seoData.og_title} />
+      <link rel="canonical" href="https://www.sheconomy.in" />
+    </>
+  )}
+</head>
+
 
         <body className={inter.className}>
           <Header />

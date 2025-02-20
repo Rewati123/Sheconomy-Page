@@ -9,7 +9,7 @@ datasource db {
 
 }
 
-model Application {
+model application {
   id          Int      @id @default(autoincrement())
   fullName    String
   email       String   @unique
@@ -19,10 +19,10 @@ model Application {
   profileLink String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  user        User?
+  user        user?
 }
 
-model User {
+model user {
   id                Int              @id @default(autoincrement())
   email             String           @unique
   password          String
@@ -30,23 +30,23 @@ model User {
   applicationId     Int              @unique
   createdAt         DateTime         @default(now())
   updatedAt         DateTime         @updatedAt
-  application       Application      @relation(fields: [applicationId], references: [id])
-  quizResults       UserQuizResult[]
-  videoProgress     VideoProgress[]
+  application       application      @relation(fields: [applicationId], references: [id])
+  quizResults       userQuizResult[]
+  videoProgress     videoProgress[]
 }
 
-model Video {
+model video {
   id          Int             @id @default(autoincrement())
   title       String
   description String
   url         String
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
-  quiz        Quiz?
-  progress    VideoProgress[]
+  quiz        quiz?
+  progress    videoProgress[]
 }
 
-model VideoProgress {
+model videoProgress {
   id        Int      @id @default(autoincrement())
   userId    Int
   videoId   Int
@@ -54,27 +54,27 @@ model VideoProgress {
   completed Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id])
-  video     Video    @relation(fields: [videoId], references: [id])
+  user      user     @relation(fields: [userId], references: [id])
+  video     video    @relation(fields: [videoId], references: [id])
 
   @@unique([userId, videoId])
   @@index([videoId], map: "VideoProgress_videoId_fkey")
 }
 
-model Quiz {
+model quiz {
   id              Int              @id @default(autoincrement())
   videoId         Int              @unique
-  questions       Question[]
-  video           Video            @relation(fields: [videoId], references: [id])
-  userQuizResults UserQuizResult[]
+  questions       question[]
+  video           video            @relation(fields: [videoId], references: [id])
+  userQuizResults userQuizResult[]
 }
 
-model Question {
+model question {
   id      Int      @id @default(autoincrement())
   quizId  Int
   text    String
   options Option[]
-  quiz    Quiz     @relation(fields: [quizId], references: [id])
+  quiz    quiz     @relation(fields: [quizId], references: [id])
 
   @@index([quizId], map: "Question_quizId_fkey")
 }
@@ -84,25 +84,25 @@ model Option {
   questionId Int
   text       String
   isCorrect  Boolean
-  question   Question @relation(fields: [questionId], references: [id])
+  question   question @relation(fields: [questionId], references: [id])
 
   @@index([questionId], map: "Option_questionId_fkey")
 }
 
-model UserQuizResult {
+model userQuizResult {
   id        Int      @id @default(autoincrement())
   userId    Int
   quizId    Int
   score     Int
   completed DateTime @default(now())
-  quiz      Quiz     @relation(fields: [quizId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
+  quiz      quiz     @relation(fields: [quizId], references: [id])
+  user      user     @relation(fields: [userId], references: [id])
 
   @@index([quizId], map: "UserQuizResult_quizId_fkey")
   @@index([userId], map: "UserQuizResult_userId_fkey")
 }
 
-model OTP {
+model oTP {
   id        Int      @id @default(autoincrement())
   type      String
   value     String
@@ -111,13 +111,15 @@ model OTP {
   createdAt DateTime @default(now())
 }
 
-model TemporaryUser {
+model temporaryUser {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
 }
-model Program {
+
+
+model program {
   id                  Int      @id @default(autoincrement())
   title               String
   subtitle            String
@@ -128,20 +130,20 @@ model Program {
   start_Date          DateTime
   end_Date            DateTime
   image               String
-  benefits              Benefit[]
-testimonials          Testimonial[]
+  benefits              benefit[]
+testimonials          testimonial[]
 }
-model Benefit {
+model benefit {
   id          Int      @id @default(autoincrement())
   programId   Int
   icon        String?  @db.VarChar(255)
   title       String
   description String?  @db.Text
 
-  Program Program[]
+  Program program[]
 }
 
-model Testimonial {
+model testimonial {
   id          Int     @id @default(autoincrement())
   programId   Int
   name        String  @db.VarChar(255)
@@ -149,7 +151,7 @@ model Testimonial {
   designation String? @db.VarChar(255)
   message     String? @db.Text
 
-  Program Program[]
+  Program program[]
 }
 model seo {
   id              Int      @id @default(autoincrement())

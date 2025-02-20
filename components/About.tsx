@@ -1,4 +1,4 @@
-export default function About() {
+export default function About({ description }) {
   return (
     <section id="about" className="bg-[#D41461] text-white py-16 px-6">
       <div className="container mx-auto text-center">

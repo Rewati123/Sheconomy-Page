@@ -8,7 +8,7 @@ const benefits = [
   { title: "Support & Mentorship", description: "Get personalized mentorship to guide your startup through each phase.", image: "/09 1.png" }
 ]
 
-export default function Benefits() {
+export default function Benefits({benefits}) {
   return (
     <section id="benefits" className="py-16 bg-white px-6">
       <div className="container mx-auto">
