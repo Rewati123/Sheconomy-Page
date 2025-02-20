@@ -73,13 +73,13 @@ model question {
   id      Int      @id @default(autoincrement())
   quizId  Int
   text    String
-  options Option[]
+  options option[]
   quiz    quiz     @relation(fields: [quizId], references: [id])
 
   @@index([quizId], map: "Question_quizId_fkey")
 }
 
-model Option {
+model option {
   id         Int      @id @default(autoincrement())
   questionId Int
   text       String

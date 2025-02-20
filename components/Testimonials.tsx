@@ -36,7 +36,7 @@ const testimonials = [
   }
 ]
 
-export default function Testimonials({testimonials}) {
+export default function Testimonials({testimonial}) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const nextTestimonial = () => {

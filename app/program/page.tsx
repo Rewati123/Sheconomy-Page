@@ -116,7 +116,7 @@ const Programpage: React.FC = () => {
       />
       
       <Testimonials 
-        testimonials={programData.testimonials} 
+        testimonial={programData.testimonials} 
       />
       
       <Partners />
