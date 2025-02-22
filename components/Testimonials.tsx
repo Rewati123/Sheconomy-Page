@@ -14,8 +14,13 @@ interface TestimonialsProps {
   testimonialdata: Testimonial[];
 }
 
-const Testimonials: React.FC<TestimonialsProps> = ({ testimonialdata }) => {
+const Testimonials: React.FC<TestimonialsProps> = ({ testimonialdata = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Don't render anything if there are no testimonials
+  if (!testimonialdata || testimonialdata.length === 0) {
+    return null;
+  }
 
   const nextTestimonial = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonialdata.length);
