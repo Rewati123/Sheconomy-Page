@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react"
 import { useModal } from "../hooks/use-modal"
 import ApplicationModal from "./ApplicationModal"
 
-export default function Hero({title,subtitle,description,image}) {
+export default function Hero({title,subtitle,image}) {
   const { isOpen, openModal, closeModal } = useModal()
   const [showSuccessModal, setShowSuccessModal] = useState(false)
-
+console.log(image,"images")
   return (
     <section className="flex flex-col-reverse md:flex-row justify-between items-center px-6 md:px-20  bg-white">
 
@@ -16,10 +16,10 @@ export default function Hero({title,subtitle,description,image}) {
           SHE Leads The Program 2025
         </h1>
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
-          SHEconomy Women in Digital Startup Program
+        {title || "Loading..."}
         </h2>
         <p className="text-xl md:text-2xl mb-8 text-gray-600">
-          Zero fees for all women entrepreneurs or businesses led by women
+         {subtitle || "Loading..."}
         </p>
         <button
         onClick={()=>{openModal(); setShowSuccessModal(false)}}
@@ -31,7 +31,11 @@ export default function Hero({title,subtitle,description,image}) {
 
     
       <div className="w-full md:w-1/2 h-auto rounded-lg mb-8 md:mb-0">
-        <img src="/program-page.png" alt="Women Entrepreneurs" className="w-full h-auto rounded-lg" />
+        {image ? (
+          <img src={image} alt="Women Entrepreneurs" className="w-full h-auto rounded-lg" />
+        ) : (
+          <div className="w-full h-64 bg-gray-200 animate-pulse rounded-lg"></div> 
+        )}
       </div>
 
       {/* Modal */}

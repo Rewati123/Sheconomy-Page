@@ -1,4 +1,9 @@
 export interface Program {
+    timeline_Description: unknown;
+    end_Date: unknown;
+    start_Date: unknown;
+    ideal_For_Description: unknown;
+    short_description: unknown;
     title: string;
     subtitle: string;
     shortDescription: string;

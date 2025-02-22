@@ -1,37 +1,4 @@
-// import React from 'react'
-// import Hero from 'components/Hero'
-// import About from 'components/About'
-// import Benefits from 'components/Benefits'
-// import WhoShouldApply from 'components/WhoShouldApply'
-// import Timeline from 'components/Timeline'
-// import Testimonials from 'components/Testimonials'
-// import Partners from 'components/Partners'
-// import Contact from 'components/Contact'
-// import { CenteredContentWithLogos } from 'components/CenteredContentWithLogos'
-// const Programpage = () => {
-//   return (
-//     <>
-    
-//       {/* <Lerniningcenter/> */}
-//       <Hero />
-//       <About />
-//       <Benefits />
-//       <WhoShouldApply />
-//       <Timeline />
-//       <Testimonials />
-//       <Partners />
-//       <Contact />
-//       <div  className='mt-10'>
-//       <CenteredContentWithLogos/>
-//       </div>
-    
-    
-    
-//     </>
-//   )
-// }
 
-// export default Programpage
 "use client"
 
 import React, { useEffect, useState } from 'react'
@@ -57,7 +24,7 @@ const Programpage: React.FC = () => {
       try {
         const response = await axios.get('/api/program');
   
-        console.log("API Response:", response.data); // Debugging
+        console.log("API Response:", response.data); 
   
         if (response.data?.data?.length > 0) {
           setProgramData(response.data.data[0]); 
@@ -93,12 +60,13 @@ const Programpage: React.FC = () => {
       <Hero 
         title={programData.title}
         subtitle={programData.subtitle}
-        description={programData.shortDescription}  
+        
         image={programData.image}
       />
       
       <About 
         description={programData.description} 
+        shortdescription={programData.short_description}
       />
       
       <Benefits 
@@ -106,17 +74,21 @@ const Programpage: React.FC = () => {
       />
       
       <WhoShouldApply 
-        description={programData.idealForDescription} 
+        description={programData.ideal_For_Description
+        } 
       />
       
       <Timeline 
-        startDate={programData.startDate} 
-        endDate={programData.endDate} 
-        description={programData.timelineDescription} 
+        startDate={programData.start_Date
+        } 
+        endDate={programData.end_Date
+        } 
+        description={programData.timeline_Description
+        } 
       />
       
       <Testimonials 
-        // testimonialdata ={programData.testimonials} 
+        testimonialdata ={programData.testimonials} 
       />
       
       <Partners />

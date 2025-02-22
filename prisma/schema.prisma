@@ -131,7 +131,7 @@ model program {
   end_Date            DateTime
   image               String
   benefits              benefit[]
-testimonials          testimonial[]
+  testimonials          testimonial[]
 }
 model benefit {
   id          Int      @id @default(autoincrement())
@@ -140,7 +140,8 @@ model benefit {
   title       String
   description String?  @db.Text
 
-  Program program[]
+   program     program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+
 }
 
 model testimonial {
@@ -151,7 +152,8 @@ model testimonial {
   designation String? @db.VarChar(255)
   message     String? @db.Text
 
-  Program program[]
+   program      program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+
 }
 model seo {
   id              Int      @id @default(autoincrement())
