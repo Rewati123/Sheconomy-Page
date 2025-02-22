@@ -1,11 +1,20 @@
-'use client'
+"use client"
 
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-const Testimonials = ({ testimonialdata }) => {
-  
-  
+interface Testimonial {
+  profile: string;
+  name: string;
+  designation: string;
+  message: string;
+}
+
+interface TestimonialsProps {
+  testimonialdata: Testimonial[];
+}
+
+const Testimonials: React.FC<TestimonialsProps> = ({ testimonialdata }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextTestimonial = () => {

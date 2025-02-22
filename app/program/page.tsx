@@ -87,8 +87,10 @@ const Programpage: React.FC = () => {
         } 
       />
       
-      <Testimonials testimonialdata={programData.testimonials || []} />
-
+    
+        <Testimonials testimonialdata={programData.testimonials} />
+    
+      
       <Partners />
       
       <Contact />
