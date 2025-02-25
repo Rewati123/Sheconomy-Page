@@ -18,9 +18,22 @@ console.log(image,"images")
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
         {title || "Loading..."}
         </h2>
-        <p className="text-xl md:text-2xl mb-8 text-gray-600">
-         {subtitle || "Loading..."}
-        </p>
+        {subtitle
+  ? subtitle.split("\n").map((para, index) => (
+      <p 
+        key={index} 
+        className={`mb-4 text-gray-800 ${
+          index === 0 ? "text-lg md:text-xl font-bold" : "text-xs md:text-sm"
+        }`}
+      >
+        {para}
+      </p>
+    ))
+  : "Loading..."}
+
+
+
+
         <button
         onClick={()=>{openModal(); setShowSuccessModal(false)}}
           className="bg-[#FF7F42] text-white hover:bg-[#E66A2D] text-xl px-8 py-4 rounded-full transition-colors"

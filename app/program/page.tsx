@@ -57,18 +57,20 @@ const Programpage: React.FC = () => {
 
   return (
     <>
-      <Hero 
+    
+     <Hero  
         title={programData.title}
         subtitle={programData.subtitle}
         
         image={programData.image}
       />
+    
       
       <About 
         description={programData.description} 
         shortdescription={programData.short_description}
       />
-      
+
       <Benefits 
         benefits={programData.benefits} 
       />
