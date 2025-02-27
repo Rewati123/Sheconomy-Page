@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <header className="flex justify-between items-center  bg-white shadow-sm">
-      <Link href="/">
+      <Link href="/learning-center">
         <img
           src="/she logo 1.png"
           alt="SHE Logo"

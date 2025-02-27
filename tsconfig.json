@@ -29,13 +29,18 @@
       }
     ],
     "strictNullChecks": true
+    
   },
+
+
+
+
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/api/send-otp/route.ts"  ],
+, "app/api/send-otp/route.ts", "server.js"  ],
   "exclude": [
     "node_modules"
   ]

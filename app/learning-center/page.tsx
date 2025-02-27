@@ -18,8 +18,8 @@ const page = () => {
         <Comprehensive/>
         <EmpoweringWomen/>
 
-            <Partners />
-                <Contact /> 
+        <Partners />
+         <Contact /> 
     </div>
   )
 }
