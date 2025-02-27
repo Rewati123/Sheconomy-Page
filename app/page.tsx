@@ -9,7 +9,14 @@ import Comprehensive from "components/Comprehensive";
 import EmpoweringWomen from "components/EmpoweringWomen";
 import Partners from "components/Partners";
 import Contact from "components/Contact";
+
+
 export default function Home() {
+ 
+
+
+
+ 
 
 
   return (

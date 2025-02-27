@@ -3,21 +3,12 @@ import { useRouter  } from 'next/navigation'
 export default function CorePrograms() {
   const router = useRouter();
 
-const WomenEntrepreneurship = ()=>{
-router.push('/program')
-}
-
-
-
-
-
+  const WomenEntrepreneurship = () => {
+    router.push("/program "); // Query param update
+  };
 
   return (
     <div className="w-full py-12 bg-gray-100">
-  
-     
-
-   
       <div className="flex justify-center">
         <div className="bg-white rounded-lg shadow-lg p-10 w-full max-w-7xl"> 
           <h2 className="text-4xl sm:text-4xl font-bold items-center text-center text-[#D41461] mb-8">

@@ -22,7 +22,7 @@ export default function Header() {
         <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
         <Link href="/https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
         <Link href="#apply" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
-        <Link href="/learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
+        <Link href="/" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
         <Link href="#" className="flex items-center space-x-2 text-gray-600 font-bold hover:text-gray-900">
   <FaUserCircle className="w-6 h-6 text-gray-700" />
   <span>My Account</span>
