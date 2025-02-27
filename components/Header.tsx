@@ -20,13 +20,13 @@ export default function Header() {
     
       <nav className="hidden lg:flex gap-8">
         <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
-        <Link href="/https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
-        <Link href="#apply" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
+        <Link href="https://www.sheconomy.in/sell-on-sheconomy" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
+        <Link href="https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
         <Link href="/" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
-        <Link href="#" className="flex items-center space-x-2 text-gray-600 font-bold hover:text-gray-900">
+        {/* <Link href="#" className="flex items-center space-x-2 text-gray-600 font-bold hover:text-gray-900">
   <FaUserCircle className="w-6 h-6 text-gray-700" />
   <span>My Account</span>
-</Link>
+</Link> */}
       </nav>
 
  
@@ -58,13 +58,13 @@ export default function Header() {
         <div className="absolute top-16 left-0 w-full bg-white shadow-md z-10">
           <nav className="flex flex-col items-center gap-4 p-4">
           <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
-            <Link href="#benefits" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
-            <Link href="#apply" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
+            <Link href="https://www.sheconomy.in/sell-on-sheconomy" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
+            <Link href="https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
             <Link href="/learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
-            <Link href="#" className="flex items-center space-x-2 text-gray-600 font-bold hover:text-gray-900">
+            {/* <Link href="#" className="flex items-center space-x-2 text-gray-600 font-bold hover:text-gray-900">
   <FaUserCircle className="w-6 h-6 text-gray-700" />
   <span>My Account</span>
-</Link>
+</Link> */}
             <Link href="tel:+91 8448991178">
               <Button
                 variant="default"

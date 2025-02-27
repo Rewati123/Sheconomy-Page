@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 text-center text-sm">
-          © 2023 SHEconomy. All rights reserved.
+          © 2025 SHEconomy. All rights reserved.
         </div>
       </div>
     </footer>
