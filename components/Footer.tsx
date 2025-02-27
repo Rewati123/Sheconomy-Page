@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
+import { Facebook, Twitter, Instagram, Linkedin, Youtube, X } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -14,17 +14,38 @@ export default function Footer() {
           </div>
 
           <div className="flex gap-4 mt-4 sm:mt-0">
-            <a href="#" className="hover:text-gray-300">
-              <Facebook size={36} /> 
+            <a
+              href="https://www.facebook.com/sheconomyglobal"
+              className="hover:text-gray-300"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Facebook size={36} />
             </a>
-            <a href="#" className="hover:text-gray-300">
-              <Twitter size={36} />
+            <a
+              href="https://x.com/sheconomyglobal"
+              className="hover:text-gray-300"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <X size={36} />
             </a>
-            <a href="#" className="hover:text-gray-300">
+            <a
+              href="https://www.instagram.com/sheconomyglobal/"
+              className="hover:text-gray-300"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Instagram size={36} />
             </a>
-            <a href="#" className="hover:text-gray-300">
-              <Linkedin size={36} />
+         
+            <a
+              href="https://www.youtube.com/channel/UCDYeMxXES-2UJVC5gAOvP2Q?view_as=subscriber"
+              className="hover:text-gray-300"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Youtube size={36} />
             </a>
           </div>
         </div>
@@ -33,5 +54,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
