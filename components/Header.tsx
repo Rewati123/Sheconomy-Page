@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <header className="flex justify-between items-center  bg-white shadow-sm">
-      <Link href="/learning-center">
+      <Link href="/">
         <img
           src="/she logo 1.png"
           alt="SHE Logo"
@@ -19,7 +19,7 @@ export default function Header() {
     
     
       <nav className="hidden lg:flex gap-8">
-        <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
+        {/* <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link> */}
         <Link href="https://www.sheconomy.in/sell-on-sheconomy" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
         <Link href="https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
         <Link href="/" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
@@ -57,7 +57,7 @@ export default function Header() {
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-md z-10">
           <nav className="flex flex-col items-center gap-4 p-4">
-          <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link>
+          {/* <Link href="https://www.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Home</Link> */}
             <Link href="https://www.sheconomy.in/sell-on-sheconomy" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
             <Link href="https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
             <Link href="/learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
