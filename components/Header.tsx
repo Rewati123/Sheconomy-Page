@@ -31,7 +31,7 @@ export default function Header() {
 
  
       <div className="hidden lg:block">
-        <Link href="tel:+91 8448991178">
+        <Link href="https://api.whatsapp.com/send/?phone=918448991178&text&type=phone_number&app_absent=0">
           <Button
             variant="default"
             className="bg-[#FF7F42] text-white hover:bg-[#E66A2D] rounded-full h-12 w-40"
@@ -65,7 +65,7 @@ export default function Header() {
   <FaUserCircle className="w-6 h-6 text-gray-700" />
   <span>My Account</span>
 </Link> */}
-            <Link href="tel:+91 8448991178">
+            <Link href="https://api.whatsapp.com/send/?phone=918448991178&text&type=phone_number&app_absent=0">
               <Button
                 variant="default"
                 className="bg-[#FF7F42] text-white hover:bg-[#E66A2D] rounded-full h-12 w-40"

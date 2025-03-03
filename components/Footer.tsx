@@ -31,7 +31,7 @@ export default function Footer() {
               <X size={36} />
             </a>
             <a
-              href="https://www.instagram.com/sheconomyglobal/"
+              href="https://www.instagram.com/sheconomy.in/"
               className="hover:text-gray-300"
               target="_blank"
               rel="noopener noreferrer"
