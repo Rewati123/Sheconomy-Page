@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-
+import Link from 'next/link';
 export default function Contact() {
   return (
     <div className="py-8 px-4 sm:px-8 lg:px-12">
@@ -12,13 +12,14 @@ export default function Contact() {
                 Schedule A Call For More Details
               </p>
             </div>
-
+            <Link href="https://api.whatsapp.com/send/?phone=918448991178&text&type=phone_number&app_absent=0">
             <Button 
               size="lg" 
               className="bg-[#FF7F42] text-white hover:bg-[#E66A2D] text-lg sm:text-xl lg:text-2xl px-8 py-6 rounded-full whitespace-nowrap"
             >
               Schedule A Call
             </Button>
+            </Link>
           </div>
         </div>
       </section>
