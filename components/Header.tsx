@@ -24,7 +24,7 @@ export default function Header() {
         <Link href="https://www.sheconomy.in/sell-on-sheconomy" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
         <Link href="https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
         <Link href="/" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
-        <Link href="/" className="text-gray-600 font-bold hover:text-gray-900">Help Desk</Link>
+        <Link href="/help_desk" className="text-gray-600 font-bold hover:text-gray-900">Help Desk</Link>
       </nav>
 
  
@@ -59,7 +59,7 @@ export default function Header() {
             <Link href="https://www.sheconomy.in/sell-on-sheconomy" className="text-gray-600 font-bold hover:text-gray-900">Shop</Link>
             <Link href="https://community.sheconomy.in/" className="text-gray-600 font-bold hover:text-gray-900">Community</Link>
             <Link href="/learning-center" className="text-[#D41461] font-bold hover:text-[#D41461]">Learning Center</Link>
-            <Link href="/" className="text-gray-600 font-bold hover:text-gray-900">Help Desk</Link>
+            <Link href="/help_desk" className="text-gray-600 font-bold hover:text-gray-900">Help Desk</Link>
             <Link href="https://api.whatsapp.com/send/?phone=918448991178&text&type=phone_number&app_absent=0">
               <Button
                 variant="default"
