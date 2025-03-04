@@ -1,5 +1,6 @@
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, X } from "lucide-react";
 
+import Link from 'next/link';
 export default function Footer() {
   return (
     <footer className="bg-[#D41461] text-white py-8">
@@ -9,7 +10,11 @@ export default function Footer() {
             <div className="mt-4">
               <h2 className="text-2xl font-bold">Contact Us</h2>
               <h2 className="text-xl font-semibold">Call: +91 8448991178</h2>
+              <Link href="mailto:support@sheconomy.in">
               <h2 className="text-xl font-semibold">Email: support@sheconomy.in</h2>
+              </Link>
+             
+
             </div>
           </div>
 
