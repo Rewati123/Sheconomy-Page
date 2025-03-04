@@ -12,14 +12,16 @@ export default function Contact() {
                 Schedule A Call For More Details
               </p>
             </div>
-            <Link href="+918448991178">
-            <Button 
+  
+         <Link href="tel:+918448991178">
+         <Button 
               size="lg" 
               className="bg-[#FF7F42] text-white hover:bg-[#E66A2D] text-lg sm:text-xl lg:text-2xl px-8 py-6 rounded-full whitespace-nowrap"
             >
               Schedule A Call
             </Button>
-            </Link>
+         </Link>
+      
           </div>
         </div>
       </section>
