@@ -36,8 +36,13 @@ export const applicationSchema = Yup.object().shape({
         const username = value.split("/").pop() || "";
         console.log("Checking URL for:", username); 
       
-        const response = await axios.get(`https://community.sheconomy.in/urlcheckapi.php?url=${username}`);
-        console.log("API Response:", response.data);
+        const response = await axios.get(`https://community.sheconomy.in/urlcheckapi.php?url=${username}`, {
+          headers: {
+            "Content-Type": "application/json"
+          },
+         
+        })
+        ;
       
         return response.data && response.data.status === true;
       } catch (error) {
