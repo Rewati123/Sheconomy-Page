@@ -10,7 +10,7 @@ import 'react-phone-input-2/lib/style.css';
 import PhoneInput from "react-phone-input-2";
 import confetti from "canvas-confetti"
 import { CheckCircle } from "lucide-react";
-
+import { Loader2 } from 'lucide-react';
 interface ApplicationModalProps {
   isOpen: boolean
   onClose: () => void;
@@ -126,7 +126,7 @@ export default function ApplicationModal({ isOpen, onClose,showSuccessModal,setS
             validationSchema={applicationSchema}
             onSubmit={handleSubmit}
           >
-            {({ isSubmitting, setFieldValue, touched, errors, values }) => (
+            {({ isSubmitting, setFieldValue, touched,isValidating, errors, values }) => (
               <Form className="space-y-6">
                 <div>
                   <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
@@ -254,6 +254,12 @@ export default function ApplicationModal({ isOpen, onClose,showSuccessModal,setS
                     className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#D41461] focus:border-transparent
                       ${touched.profileLink && errors.profileLink ? 'border-red-500' : 'border-gray-300'}`}
                   />
+                                    {isValidating && (
+                    <div className="mt-1 text-sm text-blue-600 flex items-center">
+                      <Loader2 className="animate-spin h-4 w-4 mr-2" />
+                      Validating profile link...
+                    </div>
+                  )}
                   <ErrorMessage
                     name="profileLink"
                     component="div"
