@@ -1,6 +1,3 @@
-
-"use client"
-
 "use client"
 
 import { Inter } from 'next/font/google'
@@ -36,42 +33,27 @@ export default function RootLayout({
     fetchSeoData()
   }, [])
 
-  // Log the parsed image URL only if seoData is available
-  useEffect(() => {
-    if (seoData?.og_images) {
-      try {
-        const parsedImageUrl = JSON.parse(seoData.og_images)[0];
-        console.log("🖼️ Parsed Image URL:", parsedImageUrl);
-      } catch (err) {
-        console.error("🚨 Error parsing og_images:", err);
-      }
-    }
-  }, [seoData]);
-
   return (
     <>
       <html lang="en">
-      <head>
-  {seoData && (
-    <>
-      <title>{seoData.meta_title}</title>
-      <meta name="description" content={seoData.meta_description} />
-      <meta name="keywords" content={seoData.meta_keywords ? JSON.parse(seoData.meta_keywords).join(", ") : ""} />
-
-
-
-      {/* ✅ OG Image को Meta Tag में रखो */}
-      {seoData.og_images && (
-  <meta property="og:image" content={`https://www.sheconomy.in/uploads/${JSON.parse(seoData.og_images)[0]}`} />
-)}
-
-
-      <meta property="og:title" content={seoData.og_title} />
-      <link rel="canonical" href="https://www.sheconomy.in" />
-    </>
-  )}
-</head>
-
+        <head>
+          {seoData && (
+            <>
+              <title>{seoData.meta_title}</title>
+              <meta name="description" content={seoData.meta_description} />
+              <meta 
+                name="keywords" 
+                content={seoData.meta_keywords ? seoData.meta_keywords.split(',').join(", ") : ""} 
+              />
+              {/* ✅ OG Image को Meta Tag में रखो */}
+              {seoData.og_images && (
+                <meta property="og:image" content={seoData.og_images} />
+              )}
+              <meta property="og:title" content={seoData.og_title} />
+              <link rel="canonical" href="https://www.sheconomy.in" />
+            </>
+          )}
+        </head>
 
         <body className={inter.className}>
           <Header />
@@ -82,4 +64,3 @@ export default function RootLayout({
     </>
   )
 }
-
