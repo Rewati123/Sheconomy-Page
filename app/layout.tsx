@@ -56,7 +56,9 @@ export default function RootLayout({
     <>
       <title>{seoData.meta_title}</title>
       <meta name="description" content={seoData.meta_description} />
-      <meta name="keywords" content={seoData.meta_keywords} />
+      <meta name="keywords" content={seoData.meta_keywords ? JSON.parse(seoData.meta_keywords).join(", ") : ""} />
+
+
 
       {/* ✅ OG Image को Meta Tag में रखो */}
       {seoData.og_images && (

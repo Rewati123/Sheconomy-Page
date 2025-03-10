@@ -132,6 +132,7 @@ model program {
   image               String
   benefits              benefit[]
   testimonials          testimonial[]
+  seo                   seo?
 }
 model benefit {
   id          Int      @id @default(autoincrement())
@@ -157,6 +158,7 @@ model testimonial {
 }
 model seo {
   id              Int      @id @default(autoincrement())
+  programId       Int      @unique
   meta_title      String?  @db.VarChar(255)
   meta_description String? @db.Text
   meta_keywords   String?  @db.Text
@@ -164,4 +166,6 @@ model seo {
   og_title        String?  @db.VarChar(255)
   created_at      DateTime @default(now())
   updated_at      DateTime @default(now()) @updatedAt
+
+  program        program  @relation(fields: [programId], references: [id], onDelete: Cascade)
 }
