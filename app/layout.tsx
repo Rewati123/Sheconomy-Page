@@ -1,66 +1,74 @@
-"use client"
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import "./globals.css";
 
-import { Inter } from 'next/font/google'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import { useEffect, useState } from 'react'
-import Head from 'next/head' // Import Next.js Head component
-import "./globals.css"
+const inter = Inter({ subsets: ["latin"] });
 
-const inter = Inter({ subsets: ['latin'] })
+// ✅ generateMetadata() function में API से SEO data fetch करो
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    // 🌍 Absolute URL (Backend API URL from .env)
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; 
+    
+    const response = await fetch(`${API_URL}/api/seo`, {
+      cache: "no-store", // 🚀 Real-time fresh data
+    });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const [seoData, setSeoData] = useState<any>(null)
+    if (!response.ok) throw new Error("Failed to fetch SEO data");
 
-  useEffect(() => {
-    // Fetch SEO data from the API on component mount
-    const fetchSeoData = async () => {
-      try {
-        const response = await fetch('/api/seo')
-        const data = await response.json()
-        if (data?.data) {
-          setSeoData(data.data[0]) 
-        }
-      } catch (error) {
-        console.error("Error fetching SEO data:", error)
-      }
+    const data = await response.json();
+
+    if (data?.data?.length > 0) {
+      const seoData = data.data[0];
+
+      return {
+        title: seoData.meta_title || "Sheconomy - Empowering Women",
+        description:
+          seoData.meta_description || "Sheconomy - Empowering Women Entrepreneurs",
+        keywords: seoData.meta_keywords
+          ? seoData.meta_keywords.split(",").join(", ")
+          : "business, women, empowerment",
+        openGraph: {
+          title: seoData.og_title || "Sheconomy",
+          description: seoData.og_description || "Empowering Women Entrepreneurs",
+          images: seoData.og_images ? [{ url: seoData.og_images }] : [],
+        },
+        alternates: {
+          canonical: "https://www.sheconomy.in",
+        },
+      };
     }
+  } catch (error) {
+    console.error("❌ Error fetching SEO data:", error);
+  }
 
-    fetchSeoData()
-  }, [])
+  // ✅ Default Metadata (अगर API से कुछ ना मिले)
+  return {
+    title: "Sheconomy - Empowering Women",
+    description: "Sheconomy - Empowering Women Entrepreneurs",
+    keywords: "business, women, empowerment",
+    openGraph: {
+      title: "Sheconomy",
+      description: "Empowering Women Entrepreneurs",
+      images: [],
+    },
+    alternates: {
+      canonical: "https://www.sheconomy.in",
+    },
+  };
+}
 
+// ✅ Root Layout Component
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <html lang="en">
-        <head>
-          {seoData && (
-            <>
-              <title>{seoData.meta_title}</title>
-              <meta name="description" content={seoData.meta_description} />
-              <meta 
-                name="keywords" 
-                content={seoData.meta_keywords ? seoData.meta_keywords.split(',').join(", ") : ""} 
-              />
-              {/* ✅ OG Image को Meta Tag में रखो */}
-              {seoData.og_images && (
-                <meta property="og:image" content={seoData.og_images} />
-              )}
-              <meta property="og:title" content={seoData.og_title} />
-              <link rel="canonical" href="https://www.sheconomy.in" />
-            </>
-          )}
-        </head>
-
-        <body className={inter.className}>
-          <Header />
-          {children}
-          <Footer />
-        </body>
-      </html>
-    </>
-  )
+    <html lang="en">
+      <body className={inter.className}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
+    </html>
+  );
 }
