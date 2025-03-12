@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
           images: seoData.og_images ? [{ url: seoData.og_images }] : [],
         },
         alternates: {
-          canonical: "https://www.sheconomy.in",
+          canonical: "https://learning.sheconomy.in/program",
         },
       };
     }
@@ -60,7 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-// ✅ Root Layout Component
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
