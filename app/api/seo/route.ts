@@ -14,6 +14,7 @@ export async function GET(req: Request) {
         meta_keywords: true,
         og_images: true,
         og_title: true,
+        og_description: true,
 
       },
     })

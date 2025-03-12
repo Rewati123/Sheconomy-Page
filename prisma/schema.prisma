@@ -164,6 +164,7 @@ model seo {
   meta_keywords   String?  @db.Text
   og_images       String?  @db.LongText
   og_title        String?  @db.VarChar(255)
+  og_description   String?  @db.VarChar(5000)
   created_at      DateTime @default(now())
   updated_at      DateTime @default(now()) @updatedAt
 
