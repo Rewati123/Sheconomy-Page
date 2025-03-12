@@ -6,14 +6,14 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// ✅ generateMetadata() function में API से SEO data fetch करो
+
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    // 🌍 Absolute URL (Backend API URL from .env)
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://learning.sheconomy.in/program"; 
+   
+    const API_URL =  "https://learning.sheconomy.in"; 
     
     const response = await fetch(`${API_URL}/api/seo`, {
-      cache: "no-store", // 🚀 Real-time fresh data
+      cache: "no-store", 
     });
 
     if (!response.ok) throw new Error("Failed to fetch SEO data");
@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
     console.error("❌ Error fetching SEO data:", error);
   }
 
-  // ✅ Default Metadata (अगर API से कुछ ना मिले)
+ 
   return {
     title: "Sheconomy - Empowering Women",
     description: "Sheconomy - Empowering Women Entrepreneurs",
