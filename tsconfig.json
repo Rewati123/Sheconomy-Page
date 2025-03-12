@@ -40,7 +40,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/api/send-otp/route.ts", "server.js"  ],
+, "app/api/send-otp/route.ts", "server.js" ],
   "exclude": [
     "node_modules"
   ]

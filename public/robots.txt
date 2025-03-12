@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://learning.sheconomy.in
+
+# Sitemaps
+Sitemap: https://learning.sheconomy.in/sitemap.xml

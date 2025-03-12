@@ -7,7 +7,8 @@
     "dev:program": "node server.js",
     "start": "next start",
     "postinstall": "prisma generate",
-    "build": "prisma generate && next build"
+    "build": "prisma generate && next build",
+ "generate-sitemap": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.2",
@@ -27,7 +28,6 @@
     "mysql2": "^3.12.0",
     "next": "^15.2.0",
     "next-auth": "^4.24.11",
-    "next-sitemap": "^4.2.3",
     "nodemailer": "^6.9.16",
     "pdfkit": "^0.16.0",
     "quiz": "^0.1.0",
@@ -50,7 +50,7 @@
     "@prisma/client": "^6.4.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.0",
-    "@types/node": "^20",
+    "@types/node": "^20.17.24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
@@ -59,11 +59,12 @@
     "eslint-config-next": "^15.1.4",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^15.14.0",
+    "next-sitemap": "^4.2.3",
     "postcss": "^8",
     "prettier": "^3.4.2",
     "prisma": "^6.4.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.2"
   }
 }

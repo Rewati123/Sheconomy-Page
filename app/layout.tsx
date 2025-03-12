@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const API_URL =  "https://learning.sheconomy.in"; 
     
     const response = await fetch(`${API_URL}/api/seo`, {
-      cache: "no-store", 
+      next: { revalidate: 60 }
     });
 
     if (!response.ok) throw new Error("Failed to fetch SEO data");
