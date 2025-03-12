@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export async function generateMetadata(): Promise<Metadata> {
   try {
     // 🌍 Absolute URL (Backend API URL from .env)
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; 
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://learning.sheconomy.in/program"; 
     
     const response = await fetch(`${API_URL}/api/seo`, {
       cache: "no-store", // 🚀 Real-time fresh data
